@@ -91,7 +91,7 @@ export { default as MyComponent } from './MyComponent.vue'
 ```json
 {
   "exports": {
-    ".": : {
+    "." : {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
