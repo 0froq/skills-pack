@@ -105,10 +105,10 @@ Five font families configured:
 Uses `un-` prefix to avoid conflicts with other libraries:
 
 ```html
-<!-- Standard attributify (disabled) -->
+<!-- ❌ Standard attributify (disabled) -->
 <div bg-red-500 text-white p-4></div>
 
-<!-- Prefixed attributify (enabled) -->
+<!-- ✅ Prefixed attributify (enabled) -->
 <div un-bg-red-500 un-text-white un-p-4></div>
 ```
 
