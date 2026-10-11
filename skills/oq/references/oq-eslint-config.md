@@ -46,10 +46,10 @@ export default antfu(
 Strict attribute-per-line enforcement for Vue templates:
 
 ```vue
-<!-- Bad: Multiple attributes on one line -->
+<!-- ❌ Bad: Multiple attributes on one line -->
 <div class="foo" id="bar" @click="handle">
 
-<!-- Good: One attribute per line -->
+<!-- ✅ Good: One attribute per line -->
 <div
   class="foo"
   id="bar"
