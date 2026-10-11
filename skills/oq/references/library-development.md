@@ -43,7 +43,7 @@ export default defineConfig({
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": : {
+    "." : {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     }
@@ -91,7 +91,7 @@ export { default as MyComponent } from './MyComponent.vue'
 ```json
 {
   "exports": {
-    ".": : {
+    "." : {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
