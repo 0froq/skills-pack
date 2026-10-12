@@ -22,7 +22,7 @@ pnpx skills add 0froq/skills-pack --skill=cloudflare-sites
 
 | Skill | |
 | --- | --- |
-| [cloudflare-sites](skills/cloudflare-sites) | 新站和从 Pages 迁过来的站，用 Workers 和 `cf` |
+| [cloudflare-sites](skills/cloudflare-sites) | 新站和从 Pages 迁过来的站，用 Workers、`cf`、Worker Previews |
 | [oq](skills/oq) | 项目约定：ESLint、pnpm catalog、UnoCSS、发布 |
 
 ## 加一份
