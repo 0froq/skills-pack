@@ -23,9 +23,9 @@ pnpx skills add 0froq/skills-pack --skill=cloudflare-sites
 | Skill | |
 | --- | --- |
 | [cloudflare-sites](skills/cloudflare-sites) | 新站和从 Pages 迁过来的站，用 Workers、`cf`、Worker Previews |
-| [oq](skills/oq) | 项目约定：ESLint、pnpm catalog、UnoCSS、发布 |
+| [oq](skills/oq) | 写代码的约定：TypeScript、测试、pnpm catalog、发布 |
 | [repo-face](skills/repo-face) | README 的形状：产品、库、port、内部契约，以及许可节 |
-| [repo-architecture](skills/repo-architecture) | 目录和包边界：发布库、站点、monorepo，以及 froQ 自己的覆盖 |
+| [stack](skills/stack) | 目录，以及 Nuxt、ESLint、UnoCSS 的配置 |
 
 ## 加一份
 
