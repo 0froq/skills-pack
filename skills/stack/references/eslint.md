@@ -1,5 +1,9 @@
 # ESLint
 
+froQ **sites** use Oxlint, Oxfmt, and `vp` instead; see [lint-format.md](lint-format.md).
+
+This file is for **published npm libraries** (`antfu/starter-ts` shape).
+
 `eslint.config.ts`. `@antfu/eslint-config`. Catalog: `dev`.
 
 ```ts
@@ -24,16 +28,7 @@ export default antfu({
 })
 ```
 
-A Nuxt app appends the generated config:
-
-```ts
-import antfu from '@antfu/eslint-config'
-import nuxt from './.nuxt/eslint.config.mjs'
-
-export default antfu({ /* same options */ }).append(nuxt())
-```
-
-Ignore `content/**`, `README.md`, and `vendor/ui/**`.
+Ignore `content/**`, `README.md`, and `vendor/ui/**` when a library vendors UI source.
 dprint rewrites MDC `---` prop blocks. The vendored UI library has its own config.
 
 `@froq/ui` limits the catalog rule to dev dependencies. Runtime ranges stay portable for `file:vendor/ui`:

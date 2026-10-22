@@ -22,10 +22,10 @@ pnpx skills add 0froq/skills-pack --skill=cloudflare-sites
 
 | Skill | |
 | --- | --- |
-| [cloudflare-sites](skills/cloudflare-sites) | 新站和从 Pages 迁过来的站，用 Workers、`cf`、Worker Previews |
+| [cloudflare-sites](skills/cloudflare-sites) | Workers + `cf`、Worker Previews；标准见 [lig](https://github.com/0froq/lig)，从 Pages 迁站 |
 | [oq](skills/oq) | 写代码的约定：TypeScript、测试、pnpm catalog、发布 |
 | [repo-face](skills/repo-face) | README 的形状：产品、库、port、内部契约，以及许可节 |
-| [stack](skills/stack) | 目录，以及 Nuxt、ESLint、UnoCSS 的配置 |
+| [stack](skills/stack) | 目录，以及 Nuxt、Oxlint/Oxfmt（vite-plus）、库的 ESLint、UnoCSS；站点以 [lig](https://github.com/0froq/lig) 为准 |
 
 ## 加一份
 

@@ -1,12 +1,12 @@
 ---
 name: stack
 description: >-
-  Lay out a froQ repo and write its Nuxt, ESLint, and UnoCSS config.
-  Use when creating a repository, adding those tools, or deciding where
-  code and config files go.
+  Lay out a froQ repo and write its Nuxt, Oxlint/Oxfmt (vite-plus), ESLint
+  (libraries), and UnoCSS config. Use when creating a repository, adding those
+  tools, or deciding where code and config files go.
 metadata:
   author: froQ
-  version: "2026.10.14"
+  version: "2026.10.22"
   source: Hand-written from froQ repos, antfu/starter-ts, and voidzero-dev/vite-plus. https://github.com/0froq/skills-pack
 ---
 
@@ -22,7 +22,8 @@ metadata:
 
 | 工具 | 读 |
 | --- | --- |
-| ESLint | [references/eslint.md](references/eslint.md) |
+| 站点 lint / format（lig 标准） | [references/lint-format.md](references/lint-format.md) |
+| 发 npm 的库（ESLint） | [references/eslint.md](references/eslint.md) |
 | Nuxt | [references/nuxt.md](references/nuxt.md) |
 | UnoCSS | [references/unocss.md](references/unocss.md) |
 
@@ -32,5 +33,6 @@ README 在 `repo-face`。Cloudflare 发布在 `cloudflare-sites`。
 ## 上游
 
 [antfu/starter-ts](https://github.com/antfu/starter-ts) 是要发 npm 的库的目录。
-[voidzero-dev/vite-plus](https://github.com/voidzero-dev/vite-plus) 是 `packages/` 加 Rust `crates/`。
-不要把 Cargo、`vp`、devcontainer 抄进网站或普通库。
+[voidzero-dev/vite-plus](https://github.com/voidzero-dev/vite-plus) 在 monorepo 里是 `packages/` 加 Rust `crates/`。
+froQ 站点（lig）用其中的 `vp` 跑 oxlint、oxfmt 和测试；不要把 Cargo 或 devcontainer 抄进普通站点或库。
+站点模板见 [0froq/lig](https://github.com/0froq/lig)。
