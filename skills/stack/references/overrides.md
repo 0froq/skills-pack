@@ -15,7 +15,9 @@ Match `onlyBuiltDependencies` or `allowBuilds` to the major pnpm version already
 
 ## Hooks
 
-pre-commit installs with `pnpm i --frozen-lockfile --ignore-scripts --offline`, then lint-staged runs `eslint --fix`.
+pre-commit installs with `pnpm i --frozen-lockfile --ignore-scripts --offline`, then lint-staged runs fixes.
+Sites (lig): lint-staged calls `vp lint` and `vp fmt` with `.oxlintrc.json` / `.oxfmtrc.json` (see [lint-format.md](lint-format.md)).
+Published libraries: lint-staged runs `eslint --fix`.
 Do not replace that with `pnpm run ci` or nano-staged.
 `prepare` is `npx simple-git-hooks` unless the repo already syncs skills there.
 

@@ -6,9 +6,10 @@
 modules: [
   '@nuxt/content',
   '@nuxtjs/i18n',
-  '@nuxt/eslint',
 ]
 ```
+
+Lint and format use Oxlint and Oxfmt through vite-plus, not `@nuxt/eslint`. See [lint-format.md](lint-format.md) and [0froq/lig](https://github.com/0froq/lig).
 
 CSS starts with the UI library and the three faces:
 

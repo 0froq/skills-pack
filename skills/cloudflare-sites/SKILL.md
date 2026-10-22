@@ -1,21 +1,26 @@
 ---
 name: cloudflare-sites
-description: Deploy froQ static sites and Nuxt sites to Cloudflare as Workers with the cf CLI. Use when adding Cloudflare deploy, Workers Builds, Worker Previews, migrating a Pages project, migrating wrangler.jsonc, replacing --prebuilt or cf:build, or when asked to copy void, paper-landing, lig, or poim. Do not create new Pages projects. Do not use wrangler for deploy or preview.
+description: Deploy froQ static sites and Nuxt sites to Cloudflare as Workers with the cf CLI. Use when adding Cloudflare deploy, Workers Builds, Worker Previews, migrating a Pages project, migrating wrangler.jsonc, replacing --prebuilt or cf:build, or when scaffolding from lig or migrating legacy Pages repos. Do not create new Pages projects. Do not use wrangler for deploy or preview.
 metadata:
   author: froQ
-  version: "2026.10.12"
-  source: Hand-written. Reference 0froq/poim main (PR #5). https://github.com/0froq/skills-pack
+  version: "2026.10.22"
+  source: Hand-written. Gold standard 0froq/lig. https://github.com/0froq/skills-pack
 ---
 
-新的 froQ 静态站和 Nuxt 站发布到 Cloudflare Workers（静态资源），用 `cf`。不要新建 Pages 项目，也不要照抄 void、paper-landing、lig。参照 [0froq/poim](https://github.com/0froq/poim) main（[PR #5](https://github.com/0froq/poim/pull/5)）。
+新的 froQ 静态站和 Nuxt 站发布到 Cloudflare Workers（静态资源），用 `cf`。不要新建 Pages 项目。标准模板是 [0froq/lig](https://github.com/0froq/lig)：Workers Builds、`pnpm generate`，生产 `pnpm exec cf deploy`，预览 `pnpm exec cf previews deploy`。
 
-## 不要照抄的仓库
+## 参照与旧仓库
 
-- `void`：先是 Worker 加 GitHub Action（仓库里放 API token），后来改成 Pages 的 GitHub 连接。那是旧决定。
-- `paper-landing`：Pages 的 GitHub 连接，构建 `pnpm generate`，发布 `.output/public`。没有 wrangler。
-- `lig`：没有部署。
+| 仓库 | 怎么用 |
+| --- | --- |
+| **lig** | **标准**。`cloudflare.config.ts` + `wrangler.config.ts`，`deploy` / `preview:deploy` 先 `pnpm generate` 再 `cf` / `cf previews`。 |
+| **paper-landing** | 仅作对照：仍是 Pages GitHub 连接，发布 `.output/public`。不要当通用模板抄。 |
+| **void** | 历史：先 Worker + Action，后改 Pages。不要照抄那条链路。 |
+| **poim** | 可参考的迁站样例（[PR #5](https://github.com/0froq/poim/pull/5)），但以 lig 为准。 |
 
-不要照抄它们的部署方式。新站点和从 Pages 迁过来的站点都读这份 skill。迁的时候新建 Worker，不要沿用 Pages 项目、仓库里的 API token，或 `preset: 'cloudflare_pages'`。
+新站点和从 Pages 迁过来的站点都读这份 skill。迁的时候新建 Worker，不要沿用 Pages 项目、仓库里的 API token，或 `preset: 'cloudflare_pages'`。
+
+**例外：`osdash`** 保留 void 生产部署和 Cloudflare 预览，不把生产迁到 `cf`。
 
 ## Pages
 
@@ -98,7 +103,7 @@ Nuxt 路由没有尾斜杠，静态文件却是 `folder/index.html`。`auto-trai
 - 构建命令：`pnpm generate`
 - 生产部署：`pnpm exec cf deploy`（用项目里钉住的 `cf`）
 - 打开 Worker Previews（一次性，不能撤销）。预览命令：`pnpm exec cf previews deploy`。Builds for Preview branches 打开。
-- Production 和 Previews Base 都设 `NODE_VERSION=22`
+- Production 和 Previews Base 都设 `NODE_VERSION=24.21.0`（与 lig 的 `.node-version` / `engines` 一致）
 - API token 用 `Workers Builds - 2026-09-19 22:23`
 
 预览地址：分支别名 `<branch-slug>-<worker>.sayhola.workers.dev`（每个 PR 固定，后面的构建更新同一条），以及每次提交的 `<hash>-<worker>.sayhola.workers.dev`。Cloudflare 的 PR 评论在用 `cf` 时会写 "No Preview URL"（只有 `wrangler preview` 才会填链接）。这是预期的，从别名或构建日志拿地址。继续用 `cf`，不要为了那条评论改成 wrangler。
@@ -112,7 +117,7 @@ Worker Previews 不继承生产的变量、绑定、密钥。预览要用就写�
 ## 工具版本
 
 - `cf` 是 beta，命令和配置格式还会变。验证过的版本是 `1.0.0-beta.12`，钉死这个版本，不要跟 latest。
-- 加载 `cloudflare.config.ts` 需要 Node.js >= 22.18（`module.registerHooks`）。报错文案可能让人以为是 Bun，先看 `node -v`。
+- 加载 `cloudflare.config.ts` 需要 Node.js >= 22.18（`module.registerHooks`）。froQ 站点在 Workers Builds 和本地用 **24.21.0**。报错文案可能让人以为是 Bun，先看 `node -v`。
 - 项目声明了 `cf` 之后，全局的 `cf` 会转给项目里的那份。
 - `cf deploy --dry-run` 不需要登录，用来确认资源打进了包。不要加 `--prebuilt`。
 - `cf auth login` 要浏览器。无人值守用环境变量 `CLOUDFLARE_API_TOKEN`，不要写进仓库。
