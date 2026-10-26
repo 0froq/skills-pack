@@ -6,9 +6,10 @@
 modules: [
   '@nuxt/content',
   '@nuxtjs/i18n',
-  '@nuxt/eslint',
 ]
 ```
+
+Do not add `@nuxt/eslint`. Lint and format are vite-plus + `@liangmi/vp-config`; see [vp-config.md](vp-config.md).
 
 CSS starts with the UI library and the three faces:
 

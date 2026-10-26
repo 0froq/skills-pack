@@ -7,7 +7,7 @@ src/index.ts          source
 test/                 tests and tsnapi snapshots
 tsdown.config.ts      build
 vitest.config.ts
-eslint.config.js      @antfu/eslint-config, type: 'lib', pnpm: true
+eslint.config.js      @antfu/eslint-config, type: 'lib', pnpm: true (sites use vp-config instead)
 pnpm-workspace.yaml   catalogs, even for one package
 .github/workflows/ci.yml
 AGENTS.md

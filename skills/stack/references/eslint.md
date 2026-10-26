@@ -1,4 +1,8 @@
-# ESLint
+# ESLint (legacy)
+
+froQ **sites** do not use ESLint. Prefer vite-plus + `@liangmi/vp-config`; see [vp-config.md](vp-config.md).
+
+This file is only for **published npm libraries** that still follow `antfu/starter-ts`, and for sites that have not migrated yet. Do not add a new `eslint.config.ts` to a Nuxt or static site.
 
 `eslint.config.ts`. `@antfu/eslint-config`. Catalog: `dev`.
 
@@ -24,7 +28,7 @@ export default antfu({
 })
 ```
 
-A Nuxt app appends the generated config:
+A legacy Nuxt app that is still on ESLint appends the generated config. New sites skip this and drop `@nuxt/eslint`:
 
 ```ts
 import antfu from '@antfu/eslint-config'
