@@ -5,6 +5,8 @@ description: Custom @antfu/eslint-config setup with specific Vue formatting rule
 
 # oQ's ESLint Configuration
 
+froQ **sites** do not use this file. Prefer [stack/references/vp-config.md](../../stack/references/vp-config.md).
+
 Based on `@antfu/eslint-config` with personal customizations for Vue projects and specific formatting preferences.
 
 ## Base Configuration

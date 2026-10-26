@@ -1,6 +1,6 @@
 ---
 name: oq
-description: oQ's coding conventions for JavaScript and TypeScript. Use for file layout inside a module, types, tests, pnpm catalogs, and releases. Directory choice and Nuxt, ESLint, and UnoCSS files live in the stack skill.
+description: oQ's coding conventions for JavaScript and TypeScript. Use for file layout inside a module, types, tests, pnpm catalogs, and releases. Directory choice and Nuxt, vite-plus / vp-config, ESLint (legacy libraries), and UnoCSS files live in the stack skill.
 metadata:
   author: oQ
   version: "2026.03.10"
@@ -77,9 +77,9 @@ metadata:
 }
 ```
 
-### ESLint, Nuxt, UnoCSS
+### Lint, Nuxt, UnoCSS
 
-File shape for those tools is in the `stack` skill.
+File shape for those tools is in the `stack` skill. froQ sites use vite-plus + `@liangmi/vp-config`, not ESLint.
 
 ### Git Hooks
 

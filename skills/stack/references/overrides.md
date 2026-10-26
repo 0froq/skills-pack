@@ -6,6 +6,7 @@ These win over `starter-ts` and `vite-plus` in a froQ repo.
 
 Names already in use: `prod` and `dev`.
 `oq` also allows `inlined` and `frontend`.
+Sites put `vite-plus` and `@liangmi/vp-config` in catalog `dev`.
 Do not rename them to `cli`, `testing`, `types`, or `agentic`.
 Do not add a default catalog entry to a repo that does not already have one.
 `lig` still has one default entry for `jiti`. Leave it until that repo is migrated on purpose.
@@ -15,7 +16,9 @@ Match `onlyBuiltDependencies` or `allowBuilds` to the major pnpm version already
 
 ## Hooks
 
-pre-commit installs with `pnpm i --frozen-lockfile --ignore-scripts --offline`, then lint-staged runs `eslint --fix`.
+pre-commit installs with `pnpm i --frozen-lockfile --ignore-scripts --offline`, then lint-staged runs fixes.
+Sites: `vp lint --fix` and `vp fmt` (see [vp-config.md](vp-config.md)). Do not drop the frozen install to use Vite+'s `vp config` hook.
+Published libraries still on ESLint: `eslint --fix`.
 Do not replace that with `pnpm run ci` or nano-staged.
 `prepare` is `npx simple-git-hooks` unless the repo already syncs skills there.
 
@@ -28,6 +31,7 @@ Do not convert it to a tsdown library unless asked.
 ## Sites
 
 Private. Nuxt. Cloudflare Workers through `cloudflare-sites`.
+Lint/format: [vp-config.md](vp-config.md). Node 24.21.
 Tests sit next to source as `foo.test.ts` when a non-UI package has tests. UI is not given a test suite.
 
 ## Commits
