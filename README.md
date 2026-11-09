@@ -38,6 +38,7 @@ pnpx skills add 0froq/skills-pack --skill=froq-stack
 | [whittle](skills/whittle) | 把开放设计问题收敛为 DAG 并清零 |
 | [feeds-card-copy](skills/feeds-card-copy) | feed 卡片文案配方 |
 | [lake-paper-academic-advisor](skills/lake-paper-academic-advisor) | Lake 项目的学术顾问 |
+| [external-copy-polish](skills/external-copy-polish) | 对外文案去 AI 味：标点、口吻、checklist |
 
 预留：`froq-review`（code review 规范，待写）。
 

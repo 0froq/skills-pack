@@ -4,12 +4,18 @@ description: >-
   Use when drafting any external-facing copy for the user to send themselves
   (email, issue/PR comments, PR descriptions, short public replies). Not for
   bot↔user chat.
+license: MIT
 metadata:
   author: froQ
-  version: "2026.11.04"
+  version: "0.1.0"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
-# External copy polish (froQ fleet, 2026-11-04)
+
+# external-copy-polish
+
+Makes drafts of external-facing copy read like the user wrote them. Governs
+how the text reads, not what it says; structure still comes from repo
+templates and `froq-create-pr`.
 
 ## When
 Drafting text the user will **personally send** to outsiders: email, GitHub/upstream issue or PR comments, PR descriptions, public short replies, form messages.
@@ -105,3 +111,18 @@ Match the audience: familiar OSS → closer to A; professors / official / busine
 3. Any mechanical repeated stock line?
 4. Buzzword / empty-connector pile removed?
 5. Reads like a person in that community, not a template?
+
+## Boundaries
+
+- Never send. Drafts go to the user, who sends from the web UI, unless the
+  calling skill already permits posting (own repos / agreed derived PRs).
+- Does not decide content, claims, or commitments — only how the copy reads.
+- Does not apply to internal notes, commit messages, or bot↔user chat.
+
+## Hand-offs
+
+- `froq-mailman`: email drafts polish through this skill before landing in
+  the Drafts folder.
+- `froq-os-contrib` / `froq-create-issue` / `froq-create-pr`: external
+  comments and descriptions polish through this skill.
+- `froq-longform`: longer essays may draw on the same voice rules.
