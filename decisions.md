@@ -81,16 +81,19 @@ evidence: 44 uncommitted changes. Old-name skills deleted but not committed
           User: hold off until most skills reach a first usable version.
 
 ## G2  skills.bak and .ghfs untracked
-status: open
-edges:  blocks->G1
-evidence: skills.bak holds 10 superseded dirs; .ghfs is gh fs tool cache.
+status: settled
+edges:  raised-by->G1
+evidence: skills.bak held 10 superseded dirs; .ghfs is gh fs tool cache.
+          User: delete skills.bak, ignore .ghfs.
+decision: skills.bak deleted from disk. .ghfs goes to .gitignore (G3).
 
 ## G3  .gitignore
-status: open
+status: settled
 edges:  blocks->G2
-evidence: no .gitignore exists. .ghfs is machine-local cache, likely should
-          be ignored; skills.bak is user backup, likely should not be tracked
-          but kept on disk.
+evidence: no .gitignore existed. .ghfs is machine-local cache, skills.bak
+          was user backup, both excluded.
+decision: .gitignore contains `.ghfs/` and `skills.bak/` (belt-and-suspenders
+          in case a backup ever reappears).
 
 ## F1  frontmatter spec
 status: settled
