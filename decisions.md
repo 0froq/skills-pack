@@ -95,6 +95,17 @@ evidence: no .gitignore existed. .ghfs is machine-local cache, skills.bak
 decision: .gitignore contains `.ghfs/` and `skills.bak/` (belt-and-suspenders
           in case a backup ever reappears).
 
+## T1  SKILL.md body template
+status: settled
+edges:  raised-by->R3
+evidence: 16 skills surveyed; Boundaries/不做 appears in 8, Hand-offs/分工
+          in 4, opening positioning paragraph inconsistent. R3 review needs
+          a standard to confirm against.
+decision: TEMPLATE.md at repo root + summary in README. Fixed skeleton:
+          one-paragraph positioning, free domain sections, then required
+          `## Boundaries` and `## Hand-offs` ("None" allowed, section may
+          not be deleted). Optional `## When` and `## References`.
+
 ## R3  per-skill content review
 status: open
 edges:  blocks->G1

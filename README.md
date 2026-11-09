@@ -43,7 +43,7 @@ pnpx skills add 0froq/skills-pack --skill=froq-stack
 
 ## 加一份
 
-在 `skills/<name>/SKILL.md` 写 frontmatter。个人工作流类用 `froq-` 前缀，通用方法论不带。Frontmatter 遵循 [agentskills.io](https://agentskills.io/specification) spec：
+在 `skills/<name>/SKILL.md` 写 frontmatter。个人工作流类用 `froq-` 前缀，通用方法论不带。Frontmatter 遵循 [agentskills.io](https://agentskills.io/specification) spec，正文结构按 [TEMPLATE.md](TEMPLATE.md)（固定节：定位段 + 领域节 + `Boundaries` + `Hand-offs`）：
 
 ```yaml
 ---
@@ -57,7 +57,9 @@ metadata:
 ---
 ```
 
-`metadata.version` 是 semver，从 `0.1.0` 起：PATCH 修内容、MINOR 加章节、到 `1.0.0` 算稳定。需要拆开的说明放在同目录的 `references/`。可执行脚本放 `scripts/`。不要加生成脚本，也不要把上游文档镜像进来。
+正文骨架：一段定位（这层回答什么、不回答什么）→ 领域规则节（自由组织）→ `## Boundaries`（硬性不做，没有就写 None）→ `## Hand-offs`（委托给谁/被谁调用，没有就写 None）。`When` 和 `References` 可选。
+
+`metadata.version` 是 semver：PATCH 修内容、MINOR 加章节、到 `1.0.0` 算稳定。需要拆开的说明放在同目录的 `references/`。可执行脚本放 `scripts/`。不要加生成脚本，也不要把上游文档镜像进来。
 
 ## 引用关系
 
