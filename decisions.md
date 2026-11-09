@@ -106,6 +106,16 @@ decision: TEMPLATE.md at repo root + summary in README. Fixed skeleton:
           `## Boundaries` and `## Hand-offs` ("None" allowed, section may
           not be deleted). Optional `## When` and `## References`.
 
+## N4  external-copy-polish placement
+status: settled
+edges:  raised-by->R3
+evidence: file existed as tmp/external-copy-polish.md (103 lines, complete
+          content from the old fleet pack). Referenced by mailman,
+          os-contrib, create-issue/pr.
+decision: added as unprefixed skill `external-copy-polish`. Generic writing
+          methodology, same rule as whittle (N1). Template sections added:
+          positioning paragraph, Boundaries, Hand-offs.
+
 ## R3  per-skill content review
 status: open
 edges:  blocks->G1
@@ -113,7 +123,8 @@ evidence: 15 skills' frontmatter was unified without content review; user
           has not manually approved any skill body yet. G1 cannot commit
           until each is confirmed.
 
-Confirmed so far: (none)
+Confirmed so far: froq-workbench (rewritten: UU/2_areas removed, mise scope
+widened, pnpm default, dots CLI pointer, template sections)
 
 ## F1  frontmatter spec
 status: settled
