@@ -95,6 +95,15 @@ evidence: no .gitignore existed. .ghfs is machine-local cache, skills.bak
 decision: .gitignore contains `.ghfs/` and `skills.bak/` (belt-and-suspenders
           in case a backup ever reappears).
 
+## R3  per-skill content review
+status: open
+edges:  blocks->G1
+evidence: 15 skills' frontmatter was unified without content review; user
+          has not manually approved any skill body yet. G1 cannot commit
+          until each is confirmed.
+
+Confirmed so far: (none)
+
 ## F1  frontmatter spec
 status: settled
 evidence: all 16 use name/description/metadata{author,version,source};

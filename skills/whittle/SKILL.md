@@ -4,7 +4,7 @@ description: Settle a pile of half-formed design questions to zero without losin
 license: MIT
 metadata:
   author: froQ
-  version: "0.2.0"
+  version: "0.3.0"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 
@@ -72,15 +72,13 @@ implementation last, in the same dependency order.
    Write `decision:`, flip status, write the outcome edge
    (`narrows`/`supersedes`/plain `blocks` resolution). Then spawn whatever the
    settle surfaced as new open nodes, each with `raised-by`.
-4. **Optionally implement early.** Once a settled node's subtree is fully
-   decided, its implementation slice may start while other branches stay
-   open. Implementation still follows the same dependency order, still uses
-   serial writers with forbidden-file lists, and is reported back to the
-   tree, never run beside it. The tree is the ledger; code is a consequence,
-   not a parallel track.
+4. **Optionally hand off a settled lane.** A fully settled subtree may be
+   handed to implementation while other branches stay open. Handoff is a
+   separate ledger (code, PRs, worker sessions); the decisions file does
+   not track implementation progress. One writer per file remains.
 5. **Check.** Run `whittle.sh check` after every settle. Never batch settles
    without a check between them: edges appended blind rot.
-6. Repeat until open count is 0 and all slices are done.
+6. Repeat until open count is 0 and all lanes are done.
 
 ## Growth rules
 
@@ -126,14 +124,31 @@ A1  declaredBy replaces layer            settled (3 children collapsed)
 └─ E2  row glyph and section lock mark   open   blocked by A5
 ```
 
+## Implementation feedback
+
+Implementation runs outside the tree, but its findings flow back in as
+new evidence nodes. History is never rewritten: when a finding
+invalidates a settled node, do not reopen it. Append instead:
+
+1. Worker writes a **finding node**: `open`, `blocks->A` on the challenged
+   node, `evidence:` carrying the real failure (error output, measured
+   conflict). Workers may write finding nodes but never `decision:` fields.
+2. In a settling session, the finding is settled like any frontier node,
+   then a superseding node (`supersedes->A`, `raised-by->F`) carries the
+   corrected decision. A drops to `dropped`; its live children re-hang via
+   `narrows`/`blocks` onto the replacement.
+3. Check stays unchanged: the DAG only grows, status flips only go
+   forward (open → settled/dropped), never backward.
+
 ## Hand-off outside the tree
 
 Three things are deliberately not tree-shaped; keep them out of the file:
 
-- **Implementation slices.** Slices start as soon as their subtree is
-  settled, serial writers, each with a forbidden-file list so it cannot
-  reach into the next layer. A parent session rules on boundary conflicts
-  the writers raise. See Loop step 4.
+- **Implementation lanes.** A settled subtree may be handed off any time,
+  and disjoint lanes may run in parallel. Workers get a forbidden-file
+  list so they cannot reach into the next layer. Workers write finding
+  nodes back into the file (see above) but never settle. A parent session
+  rules on boundary conflicts the workers raise.
 - **Review fan-out.** Parallel reviewers, one angle each, no edits. Report
   back, don't touch the tree.
 - **The decision discussion itself.** The file holds outcomes and pointers,
