@@ -1,9 +1,10 @@
 ---
 name: whittle
 description: Settle a pile of half-formed design questions to zero without losing the dependency order between them. Questions and answers form a growing DAG in one Markdown file. Use for design settling sessions, open-question lists, decision trees, ADR batches. Not for free-form brainstorming.
+license: MIT
 metadata:
   author: froQ
-  version: "2026.11.09"
+  version: "0.2.0"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 
@@ -71,9 +72,15 @@ implementation last, in the same dependency order.
    Write `decision:`, flip status, write the outcome edge
    (`narrows`/`supersedes`/plain `blocks` resolution). Then spawn whatever the
    settle surfaced as new open nodes, each with `raised-by`.
-4. **Check.** Run `whittle.sh check` after every settle. Never batch settles
+4. **Optionally implement early.** Once a settled node's subtree is fully
+   decided, its implementation slice may start while other branches stay
+   open. Implementation still follows the same dependency order, still uses
+   serial writers with forbidden-file lists, and is reported back to the
+   tree, never run beside it. The tree is the ledger; code is a consequence,
+   not a parallel track.
+5. **Check.** Run `whittle.sh check` after every settle. Never batch settles
    without a check between them: edges appended blind rot.
-5. Repeat until open count is 0 or the user stops.
+6. Repeat until open count is 0 and all slices are done.
 
 ## Growth rules
 
@@ -123,10 +130,10 @@ A1  declaredBy replaces layer            settled (3 children collapsed)
 
 Three things are deliberately not tree-shaped; keep them out of the file:
 
-- **Implementation slices.** After the open count hits 0, implement in the
-  same dependency order, serial writers, each slice with a forbidden-file
-  list so it cannot reach into the next layer. A parent session rules on
-  boundary conflicts the writers raise.
+- **Implementation slices.** Slices start as soon as their subtree is
+  settled, serial writers, each with a forbidden-file list so it cannot
+  reach into the next layer. A parent session rules on boundary conflicts
+  the writers raise. See Loop step 4.
 - **Review fan-out.** Parallel reviewers, one angle each, no edits. Report
   back, don't touch the tree.
 - **The decision discussion itself.** The file holds outcomes and pointers,
