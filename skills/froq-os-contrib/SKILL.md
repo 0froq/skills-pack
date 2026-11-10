@@ -1,46 +1,38 @@
 ---
 name: froq-os-contrib
-description: froQ's open-source contribution operation (Vue ecosystem mainly, plus Zed and daily tools). Covers issue selection evaluation, upstream issue/PR tracking, two-phase fixing on forks, claim-comment drafts, and upstream permission boundaries. Use when fixing upstream issues, picking contribution targets, or drafting claim comments. Draft PRs via froq-create-pr, issues via froq-create-issue.
+description: How an agent executes one commissioned OSS contribution task — pick an issue worth doing in a named repo, explore-and-fix on the fork, draft the claim comment, and deliver compare links and PR/issue drafts. Use when froQ asks to look at issues, fix an upstream issue, or draft a claim/PR. PR body shape via froq-create-pr, issue body via froq-create-issue.
 license: MIT
 metadata:
   author: froQ
-  version: "0.2.0"
-  source: Migrated from Grok BOT fleet (Patt persona + rules). https://github.com/0froq/skills-pack
+  version: "0.3.0"
+  source: Migrated from Grok BOT fleet (Patt persona + rules), rescoped to commissioned tasks. https://github.com/0froq/skills-pack
 ---
 
 # froq-os-contrib
 
-froQ's OSS contribution operation. Main lines: `x18n-dev/x18n`,
-`voidzero-dev/void`; Vue ecosystem mainly, plus Zed and other daily tools.
+How an agent handles one commissioned OSS contribution. The skill covers
+what happens **inside** a task — judging an issue, fixing on the fork,
+drafting claims and PR bodies, delivering links. It does not cover
+lifecycle management (watching merged PRs, follow-up pings, monitoring
+reviews): those belong to froQ's sessions or an agent harness, not here.
 
-## The only work
+## Picking an issue
 
-1. **Pick**: scan the GitHub Stars List `contrib` — the only selection
-   source. If it is empty or missing, say so for that round; do not fall
-   back to all stars. Theme lists (`vue-js-eco`, `parser`, `zed`,
-   `unjs-eco`) are for classification only; `awesome` lists are not
-   scanned; `my-stuff` is own repos. Exclude `0froq/*`, the Typst
-   ecosystem, and repos with their own work lines (x18n, void, ghfs —
-   those run their own sessions).
-2. **Evaluate**: upstream contribution / into `0froq/ui` / own wheel /
-   not worth it — conclusion first.
-3. **Track**: follow up on issues and PRs already filed.
-4. **Explore-and-fix**: friction found in daily tools or filed items —
-   investigate, reproduce, fix. No mid-run reports; verify and report at
-   the end.
+When froQ says "find issues worth doing in this repo" (recent or older
+leftovers), judge on:
 
-## Session mode
+- **Reproducibility helps but is not required.** A clear, reproducible bug
+  is easier to work; a vague one is not automatically out.
+- **Scope does not matter much.** Small or large, what matters is whether
+  it is real and fixable.
+- **Maintainer activity is irrelevant to picking.** Whether upstream
+  answers fast does not decide if the issue is worth doing.
+- **Adjacent findings**: if a fix turns up a neighboring problem, fix it
+  in the same PR only when the root cause is the same. Two issues that
+  share a file or feature but have different causes get separate PRs.
 
-- **One upstream, one session/topic; one issue, one thread.** Candidates,
-   exploration, compares, claim/PR drafts all live in that item's own
-   session. No cross-item context bleed.
-- **Report where the work was taken.** Background tasks and subagents
-   report back into the item's own session, not a different one.
-- Unfiled candidates appear only in selection digests; joining `contrib`
-   needs froQ's nod.
-- Judgment discussions (new project / upstream / standalone app) only
-   judge; once decided, open the item's own session.
-- `zed-x18n` / `0froq/zed-x18n` are own projects, not the upstream line.
+When froQ names candidate repos or lists, do not widen the search —
+report on what was asked.
 
 ## Don't hijack PRs
 
@@ -54,12 +46,14 @@ most; leave the PR to them.
    commits; no forced squash to a single commit. Every commit's
    subject/body describes only that commit — **never** issue links,
    `Fixes #…`, `fix #…`, or a PR template pasted into a commit message,
-   at any stage. Never open a draft PR on your own fork's `main`. When
-   done (or when froQ says tidy up): self-review — if D fixes what C
-   broke, squash C+D; if A/B/C/D are decoupled aspects of one big issue,
-   do **not** squash them all. Wrap up with a clear, low-jargon Chinese
-   summary of what changed (no commit history list) plus one compare link
-   (base = merge-base against upstream / branch start, head = tip).
+   at any stage. Never open a draft PR on your own fork's `main`. CI runs
+   on the fork when you push — no separate "run upstream CI" step exists
+   in this skill. When done (or when froQ says tidy up): self-review —
+   if D fixes what C broke, squash C+D; if A/B/C/D are decoupled aspects
+   of one big issue, do **not** squash them all. Wrap up with a clear,
+   low-jargon Chinese summary of what changed (no commit history list)
+   plus one compare link (base = merge-base against upstream / branch
+   start, head = tip).
 2. **Claim before PR (draft).** After the exploration wraps and before
    the upstream PR, draft a short English claim comment for froQ to
    review. **Default is one line**: if the issue already states cause and
@@ -79,14 +73,20 @@ most; leave the PR to them.
    Commit author stays `0froq <sayhola@froq.me>`, no agent attribution.
    froQ opens the PR by hand.
 
-## Message headers and links
+## Upstream etiquette
 
-Fix reports, scratch reports before a PR, claim/PR drafts, and any
-substantive item-session update: the issue or PR link goes first in the
-message. All URLs — issues, PRs, compares — are written as Markdown
-`[text](full-url)`, never bare links (`owner:repo:branch` compare links
-get truncated by clients). Drafts for froQ's review go in fenced code
-blocks.
+- Do not @-mention a maintainer unless necessary.
+- Review pushback is a discussion, not an order — you may argue back on
+  technical grounds rather than silently conforming.
+- What happens after a PR is filed (review replies, pings, staleness) is
+  out of scope: froQ or the harness handles it, not this skill.
+
+## Message and link format
+
+Fix reports, claim/PR drafts, and any substantive update: put the issue
+or PR link first, written as Markdown `[text](full-url)` — never bare
+links (`owner:repo:branch` compare URLs get truncated by clients).
+Drafts for froQ's review go in fenced code blocks.
 
 ## GitHub permission edges (hard)
 
@@ -116,7 +116,7 @@ blocks.
 
 - No hijacking author-declared PRs.
 - No acting as froQ upstream or externally — drafts and links only.
-- No mid-run reporting.
+- No mid-run reporting on an explore-and-fix; report at the end.
 - No draft PRs fork→own-main.
 - No upstream issue mentions or `Fixes` in any commit message.
 - No forced single-commit squashes.
@@ -124,7 +124,11 @@ blocks.
 - No free-form PR structure when no template exists — the fallback
   skeleton applies.
 - No restating the issue description in claim comments.
-- No reporting item results into unrelated sessions.
+- One PR solves one issue or implements one feature. Atomic, but not
+  artificially small — neighboring fixes belong together only when the
+  root cause is shared.
+- No lifecycle management (review replies, pings, stale handling) —
+  outside this skill.
 
 Tone: Chinese, short, dry. Quiet when there is nothing.
 
