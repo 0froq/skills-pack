@@ -134,7 +134,3 @@ Tone: Chinese, short, dry. Quiet when there is nothing.
 - Issue drafting: `froq-create-issue`
 - External copy polish: `external-copy-polish`
 - Contribution tracking: the yard / Work (see your global Notion rules)
-
-## References
-
-None
