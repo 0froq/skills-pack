@@ -5,6 +5,10 @@ Two config files at repo root, nothing else.
 
 ## `.oxlintrc.json`
 
+oxlint also auto-discovers `.oxlintrc.jsonc` and `oxlint.config.ts`
+(Node-based oxlint only, Node 22.18+/24+). Only one config per directory.
+JSON is the default here — it works with the standalone binary too.
+
 ```json
 {
   "plugins": ["typescript", "unicorn", "oxc", "vue"],
@@ -63,5 +67,7 @@ Repos still on ESLint (`@antfu/eslint-config`) keep `eslint.config.ts` and
 ## What lint no longer enforces
 
 The ESLint setup could enforce pnpm catalog usage via
-`pnpm/json-enforce-catalog`. oxlint has no equivalent rule. Catalog
-discipline is now a convention plus review, not a lint error.
+`pnpm/json-enforce-catalog`. That was an `eslint-plugin-pnpm` rule and
+oxlint has no equivalent. Loading it back would need `jsPlugins`, which
+oxlint still marks alpha (no semver guarantees). Catalog discipline is a
+convention plus review now, not a lint error.
