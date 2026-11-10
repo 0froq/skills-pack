@@ -124,7 +124,9 @@ evidence: feeds-card-copy was a per-project skill whose source of truth is
           AGENTS.md references it 5x. pnpx installs all skills, no per-repo
           scoping exists.
 decision: skills for one project's pipeline live in that repo, not in
-          skills-pack. feeds-card-copy deleted from skills/ (it stays in
+          skills-pack. Same for bot-routine prompts: froq-briefing deleted
+          (it runs inside the Grok Morning Chief routine, not in repo
+          sessions). feeds-card-copy deleted from skills/ (it stays in
           feeds repo as prompts/card-copy.md, which is the SoT). Improved
           copy rules may be backported to a generic skill later if a real
           second consumer appears.
@@ -137,8 +139,8 @@ evidence: 15 skills' frontmatter was unified without content review; user
           until each is confirmed.
 
 Confirmed so far: froq-workbench (English, confirmed).
-Removed from scope: feeds-card-copy (N5: moved to feeds repo, not a pack
-skill). Remaining: 14 skills.
+Removed from scope: feeds-card-copy, froq-briefing (N5: bot-routine /
+project-scoped prompts, not pack skills). Remaining: 13 skills.
 
 ## F1  frontmatter spec
 status: settled

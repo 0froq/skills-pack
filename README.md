@@ -24,7 +24,6 @@ pnpx skills add 0froq/skills-pack --skill=froq-stack
 | --- | --- |
 | [froq-workbench](skills/froq-workbench) | 环境规范：mo/mise/cf、目录约定、Mini/Air、安全边界 |
 | [froq-notion-yard](skills/froq-notion-yard) | 持久化记忆与工作台（当前后端 Notion） |
-| [froq-briefing](skills/froq-briefing) | 晨报/晚报写什么、什么时候写 |
 | [froq-os-contrib](skills/froq-os-contrib) | 开源贡献经营：选题、两阶段修程、认领、上游权限边界 |
 | [froq-create-pr](skills/froq-create-pr) | 起草 PR 标题与描述：模板顺序、fallback 骨架、Fixes 规则 |
 | [froq-create-issue](skills/froq-create-issue) | 起草新 issue：模板、复现结构、查重 |
@@ -69,5 +68,4 @@ skill 之间平行原子化，靠引导指向串起来：
 froq-create-repo ──→ froq-stack / froq-web-app / froq-code-style
 froq-os-contrib  ──→ froq-create-pr / froq-create-issue / froq-review(预留)
 froq-os-contrib, froq-mailman ──→ froq-longform（对外草稿 polish）
-froq-briefing    ──→ froq-notion-yard（读写 yard）
 ```
