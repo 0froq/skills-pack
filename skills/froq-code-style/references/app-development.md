@@ -112,15 +112,12 @@ watch(count, (newVal) => {
 
 ## UnoCSS Conventions
 
-### Attribute Usage
+### Class Usage
 
-Always use `un-` prefixed attributes:
+Write utilities as `class` attributes, not attribute-style (`un-*`):
 
 ```vue
-<!-- ❌ Standard class -->
-<div class="flex items-center justify-between p-4 bg-gray-100">
-
-<!-- ✅ Prefixed attributify -->
+<!-- ❌ Attributify -->
 <div
   un-flex
   un-items-center
@@ -128,6 +125,9 @@ Always use `un-` prefixed attributes:
   un-p-4
   un-bg-gray-100
 >
+
+<!-- ✅ Classes -->
+<div class="flex items-center justify-between p-4 bg-gray-100">
 ```
 
 ### Shortcuts
