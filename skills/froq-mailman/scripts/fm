@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+"""fm — minimal Fastmail JMAP CLI. Read + draft only, never sends.
+
+Credentials: Fastmail API token in keychain item `fastmail-jmap`
+(account = your Fastmail address, password = the `fmu1-...` token),
+or env FASTMAIL_JMAP_TOKEN.
+
+Usage:
+  fm list [mailbox-name] [--limit N]
+  fm read <id>
+  fm search <text> [--limit N]
+  fm mailboxes
+  fm draft --to A[,B] --subject S [--body-file F | --body TEXT] [--cc A]
+"""
+
+import base64
+import json
+import os
+import subprocess
+import sys
+import urllib.request
+
+SESSION_URL = "https://api.fastmail.com/jmap/session"
+USING = ["urn:ietf:params:jmap:core", "urn:ietf:params:jmap:mail"]
+
+
+def creds():
+    token = os.environ.get("FASTMAIL_JMAP_TOKEN")
+    email = os.environ.get("FASTMAIL_EMAIL")
+    if not token:
+        try:
+            out = subprocess.run(
+                ["security", "find-generic-password", "-s", "fastmail-jmap"],
+                capture_output=True, text=True, check=True,
+            ).stdout
+            for line in out.splitlines():
+                if '"acct"<blob>=' in line:
+                    email = email or line.split("=", 1)[1].strip().strip('"')
+            token = subprocess.run(
+                ["security", "find-generic-password", "-s", "fastmail-jmap", "-w"],
+                capture_output=True, text=True, check=True,
+            ).stdout.strip()
+        except Exception:
+            pass
+    if not token:
+        sys.exit(
+            "no credentials: store a Fastmail API token in keychain item "
+            "'fastmail-jmap' (Settings → Privacy & Security → Connected apps "
+            "& API tokens) or set FASTMAIL_JMAP_TOKEN"
+        )
+    return token, email
+
+
+def jmap(url, payload, auth):
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode(),
+        headers={
+            "Authorization": auth,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)
+
+
+def session(auth):
+    req = urllib.request.Request(
+        SESSION_URL,
+        headers={"Authorization": auth, "Accept": "application/json"},
+    )
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)
+
+
+def calls(api_url, auth, account, method_calls):
+    res = jmap(
+        api_url,
+        {"using": USING, "methodCalls": [
+            [name, {**args, "accountId": account}, str(i)]
+            for i, (name, args) in enumerate(method_calls)
+        ]},
+        auth,
+    )
+    out = {}
+    for name, data, tag in res.get("methodResponses", []):
+        out[tag] = (name, data)
+    return out
+
+
+def mailbox_map(api_url, auth, account):
+    res = calls(api_url, auth, account, [("Mailbox/get", {"ids": None})])
+    mbs = res["0"][1].get("list", [])
+    return {m["id"]: m["name"] for m in mbs}, {m["name"].lower(): m["id"] for m in mbs}
+
+
+def cmd_mailboxes(api_url, auth, account):
+    by_id, _ = mailbox_map(api_url, auth, account)
+    for mid, name in sorted(by_id.items(), key=lambda kv: kv[1].lower()):
+        print(f"{mid}\t{name}")
+
+
+def cmd_list(api_url, auth, account, mailbox, limit):
+    by_id, by_name = mailbox_map(api_url, auth, account)
+    filt = {}
+    if mailbox:
+        mid = by_name.get(mailbox.lower())
+        if not mid:
+            sys.exit(f"mailbox not found: {mailbox} (have: {', '.join(by_name)})")
+        filt["inMailbox"] = mid
+    res = calls(api_url, auth, account, [
+        ("Email/query", {
+            "filter": filt,
+            "sort": [{"property": "receivedAt", "isAscending": False}],
+            "limit": limit,
+        }),
+        ("Email/get", {
+            "#ids": {"resultOf": "0", "name": "Email/query", "path": "/ids"},
+            "properties": ["id", "subject", "from", "receivedAt", "preview"],
+        }),
+    ])
+    for e in res["1"][1].get("list", []):
+        frm = (e.get("from") or [{}])[0].get("email", "?")
+        print(f"{e['id']}\t{e.get('receivedAt','')[:16]}\t{frm}\t{e.get('subject','')}")
+
+
+def cmd_read(api_url, auth, account, eid):
+    res = calls(api_url, auth, account, [
+        ("Email/get", {
+            "ids": [eid],
+            "properties": ["id", "subject", "from", "to", "cc", "receivedAt",
+                           "mailboxIds", "textBody", "bodyValues"],
+            "fetchTextBodyValues": True,
+        }),
+    ])
+    lst = res["0"][1].get("list", [])
+    if not lst:
+        sys.exit(f"not found: {eid}")
+    e = lst[0]
+    print(f"Subject: {e.get('subject')}")
+    print(f"From:    {e.get('from')}")
+    print(f"To:      {e.get('to')}")
+    if e.get("cc"):
+        print(f"Cc:      {e['cc']}")
+    print(f"Date:    {e.get('receivedAt')}")
+    by_id, _ = mailbox_map(api_url, auth, account)
+    boxes = [by_id.get(m, m) for m in e.get("mailboxIds", {})]
+    print(f"Mailbox: {', '.join(boxes)}")
+    print("---")
+    bv = e.get("bodyValues", {})
+    for part in e.get("textBody", []):
+        val = bv.get(part.get("partId"), {})
+        txt = val.get("value", "")
+        if txt:
+            print(txt)
+            return
+    print("(no text body)")
+
+
+def cmd_search(api_url, auth, account, text, limit):
+    res = calls(api_url, auth, account, [
+        ("Email/query", {
+            "filter": {"text": text},
+            "sort": [{"property": "receivedAt", "isAscending": False}],
+            "limit": limit,
+        }),
+        ("Email/get", {
+            "#ids": {"resultOf": "0", "name": "Email/query", "path": "/ids"},
+            "properties": ["id", "subject", "from", "receivedAt"],
+        }),
+    ])
+    for e in res["1"][1].get("list", []):
+        frm = (e.get("from") or [{}])[0].get("email", "?")
+        print(f"{e['id']}\t{e.get('receivedAt','')[:16]}\t{frm}\t{e.get('subject','')}")
+
+
+def cmd_draft(api_url, auth, account, to, subject, body, cc):
+    _, by_name = mailbox_map(api_url, auth, account)
+    drafts = by_name.get("drafts")
+    if not drafts:
+        sys.exit("no Drafts mailbox found")
+    to_list = [{"email": a.strip()} for a in to.split(",") if a.strip()]
+    cc_list = [{"email": a.strip()} for a in cc.split(",")] if cc else []
+    draft = {
+        "mailboxIds": {drafts: True},
+        "keywords": {"$draft": True},
+        "from": [{"email": auth_user}],
+        "to": to_list,
+        "subject": subject,
+        "bodyValues": {"body": {"value": body, "charset": "utf-8"}},
+        "textBody": [{"partId": "body", "type": "text/plain"}],
+    }
+    if cc_list:
+        draft["cc"] = cc_list
+    res = calls(api_url, auth, account, [("Email/set", {"create": {"d1": draft}})])
+    created = res["0"][1].get("created", {})
+    if "d1" in created:
+        print(f"draft created: {created['d1']['id']}")
+    else:
+        print(json.dumps(res["0"][1].get("notCreated", res), indent=2))
+        sys.exit(1)
+
+
+def main():
+    global auth_user
+    args = sys.argv[1:]
+    if not args or args[0] in ("-h", "--help"):
+        print(__doc__)
+        return
+    cmd, rest = args[0], args[1:]
+
+    token, auth_user = creds()
+    auth = f"Bearer {token}"
+    s = session(auth)
+    api_url = s["apiUrl"]
+    account = s["primaryAccounts"]["urn:ietf:params:jmap:mail"]
+
+    def opt(flag, default=None):
+        if flag in rest:
+            i = rest.index(flag)
+            return rest[i + 1]
+        return default
+
+    limit = int(opt("--limit", 20))
+    if cmd == "mailboxes":
+        cmd_mailboxes(api_url, auth, account)
+    elif cmd == "list":
+        mb = rest[0] if rest and not rest[0].startswith("--") else None
+        cmd_list(api_url, auth, account, mb, limit)
+    elif cmd == "read":
+        cmd_read(api_url, auth, account, rest[0])
+    elif cmd == "search":
+        cmd_search(api_url, auth, account, rest[0], limit)
+    elif cmd == "draft":
+        to = opt("--to"); subject = opt("--subject", "")
+        body = opt("--body")
+        if not body:
+            bf = opt("--body-file")
+            body = open(bf).read() if bf else sys.stdin.read()
+        if not to:
+            sys.exit("draft needs --to")
+        cmd_draft(api_url, auth, account, to, subject, body, opt("--cc"))
+    else:
+        sys.exit(f"unknown command: {cmd}\n\n{__doc__}")
+
+
+if __name__ == "__main__":
+    main()
