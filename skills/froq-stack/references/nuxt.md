@@ -6,7 +6,7 @@
 modules: [
   '@nuxt/content',
   '@nuxtjs/i18n',
-  '@nuxt/eslint',
+  // '@nuxt/eslint',  only while the repo is still on ESLint
 ]
 ```
 

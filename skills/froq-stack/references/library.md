@@ -7,7 +7,8 @@ src/index.ts          source
 test/                 tests and tsnapi snapshots
 tsdown.config.ts      build
 vitest.config.ts
-eslint.config.js      @antfu/eslint-config, type: 'lib', pnpm: true
+.oxlintrc.json        plugins: typescript, unicorn, oxc
+.oxfmtrc.json         semi false, singleQuote true
 pnpm-workspace.yaml   catalogs, even for one package
 .github/workflows/ci.yml
 AGENTS.md
@@ -19,7 +20,7 @@ AGENTS.md
 - `exports` points at `dist`, plus `"./package.json"`
 - `files` is `["dist"]`
 - `sideEffects: false` unless the package has CSS
-- scripts: `build` = tsdown, `dev` = tsdown --watch, `lint`, `typecheck`, `test`, `knip`, `ci` runs those in order, `prepack` builds, `release` = bumpp
+- scripts: `build` = tsdown, `dev` = tsdown --watch, `lint` / `fmt`, `typecheck`, `test`, `knip`, `ci` runs those in order, `prepack` builds, `release` = bumpp
 - tsdown: `dts`, `exports`, `publint`
 
 `pnpm-workspace.yaml` uses named catalogs and `catalogMode: prefer`.
