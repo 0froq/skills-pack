@@ -50,5 +50,6 @@ or "how a repo is created" (`froq-create-repo` / `froq-stack`).
 
 - Code style: `froq-code-style`
 - Repo creation / stack selection: `froq-create-repo` / `froq-stack`
-- Persistent memory and yard: `froq-notion-yard`
+- Persistent memory (the yard): governed by the Notion contract in your
+  global agent prompt, not a skill
 - External copy polish: `external-copy-polish`

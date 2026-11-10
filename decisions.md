@@ -139,8 +139,9 @@ evidence: 15 skills' frontmatter was unified without content review; user
           until each is confirmed.
 
 Confirmed so far: froq-workbench (English, confirmed).
-Removed from scope: feeds-card-copy, froq-briefing (N5: bot-routine /
-project-scoped prompts, not pack skills). Remaining: 13 skills.
+Removed from scope: feeds-card-copy, froq-briefing, froq-notion-yard
+(N5: bot-routine / project-scoped prompts; notion-yard was redundant
+with the global-prompt Notion contract). Remaining: 12 skills.
 
 ## F1  frontmatter spec
 status: settled

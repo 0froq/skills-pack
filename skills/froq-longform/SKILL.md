@@ -40,7 +40,8 @@ rules; on conflict the Notion page wins.
 
 - External copy polish: `external-copy-polish`
 - Chat-tone de-AI: `humanizer`
-- Persistent memory for material gathering: `froq-notion-yard`
+- Material gathering: the yard via the Notion rules in your global prompt
+  (contract path, notionctl, read discipline)
 
 ## References
 

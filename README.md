@@ -23,7 +23,6 @@ pnpx skills add 0froq/skills-pack --skill=froq-stack
 | Skill | |
 | --- | --- |
 | [froq-workbench](skills/froq-workbench) | 环境规范：mo/mise/cf、目录约定、Mini/Air、安全边界 |
-| [froq-notion-yard](skills/froq-notion-yard) | 持久化记忆与工作台（当前后端 Notion） |
 | [froq-os-contrib](skills/froq-os-contrib) | 开源贡献经营：选题、两阶段修程、认领、上游权限边界 |
 | [froq-create-pr](skills/froq-create-pr) | 起草 PR 标题与描述：模板顺序、fallback 骨架、Fixes 规则 |
 | [froq-create-issue](skills/froq-create-issue) | 起草新 issue：模板、复现结构、查重 |
