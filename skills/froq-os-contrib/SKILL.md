@@ -133,11 +133,8 @@ Tone: Chinese, short, dry. Quiet when there is nothing.
 - PR body drafting: `froq-create-pr`
 - Issue drafting: `froq-create-issue`
 - External copy polish: `external-copy-polish`
-- Contribution tracking DB: the yard / Work (see `references/context.md`)
+- Contribution tracking: the yard / Work (see your global Notion rules)
 
 ## References
 
-- [context](references/context.md): stable facts — Stars Lists, tracking
-  DB, per-repo conventions, machines
-- [rules-history](references/rules-history.md): deprecated rules,
-  evolution, resolved conflicts
+None
