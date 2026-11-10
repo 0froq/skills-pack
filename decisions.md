@@ -116,6 +116,19 @@ decision: added as unprefixed skill `external-copy-polish`. Generic writing
           methodology, same rule as whittle (N1). Template sections added:
           positioning paragraph, Boundaries, Hand-offs.
 
+## N5  project-scoped skills do not belong in skills-pack
+status: settled
+edges:  narrows->N1, raised-by->R3
+evidence: feeds-card-copy was a per-project skill whose source of truth is
+          feeds repo's prompts/card-copy.md; automation runs in that repo,
+          AGENTS.md references it 5x. pnpx installs all skills, no per-repo
+          scoping exists.
+decision: skills for one project's pipeline live in that repo, not in
+          skills-pack. feeds-card-copy deleted from skills/ (it stays in
+          feeds repo as prompts/card-copy.md, which is the SoT). Improved
+          copy rules may be backported to a generic skill later if a real
+          second consumer appears.
+
 ## R3  per-skill content review
 status: open
 edges:  blocks->G1
@@ -123,8 +136,9 @@ evidence: 15 skills' frontmatter was unified without content review; user
           has not manually approved any skill body yet. G1 cannot commit
           until each is confirmed.
 
-Confirmed so far: froq-workbench (rewritten: UU/2_areas removed, mise scope
-widened, pnpm default, dots CLI pointer, template sections)
+Confirmed so far: froq-workbench (English, confirmed).
+Removed from scope: feeds-card-copy (N5: moved to feeds repo, not a pack
+skill). Remaining: 14 skills.
 
 ## F1  frontmatter spec
 status: settled
