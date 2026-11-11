@@ -1,10 +1,10 @@
 ---
 name: froq-longform
-description: Writing in froQ's own voice: long essays and 随笔, via references/voice-essay-workflow.md and STYLE.md. Use for froQ-authored longform only. External-facing copy polish goes through external-copy-polish, and chat-tone de-AI rewriting goes through humanizer.
+description: Write a long essay or 随笔 in froQ's own voice, using references/voice-essay-workflow.md and STYLE.md. Use when froQ wants a piece drafted or revised under his own name, including monthly essays and Notion 随笔. External-facing copy polish goes through external-copy-polish, and chat-tone de-AI rewriting goes through humanizer.
 license: MIT
 metadata:
   author: froQ
-  version: "0.2.0"
+  version: "0.2.1"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 

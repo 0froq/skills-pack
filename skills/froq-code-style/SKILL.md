@@ -1,10 +1,10 @@
 ---
 name: froq-code-style
-description: froQ's coding conventions for JavaScript and TypeScript. Use for file layout inside a module, imports, types, tests, catalogs, and releases. Tool config files (oxlint/oxfmt, Nuxt, UnoCSS) live in froq-stack. One-time repo scaffolding lives in froq-create-repo.
+description: froQ's coding conventions for JavaScript and TypeScript. Use when writing or reviewing code, adding a type, splitting a file, writing tests, or touching catalogs and releases. Tool config files (oxlint/oxfmt, Nuxt, UnoCSS) live in froq-stack. One-time repo scaffolding lives in froq-create-repo.
 license: MIT
 metadata:
   author: froQ
-  version: "0.2.0"
+  version: "0.2.1"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 

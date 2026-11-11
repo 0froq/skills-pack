@@ -1,10 +1,10 @@
 ---
 name: froq-mailman
-description: froQ's Fastmail handling over JMAP: read, list, search, and draft emails. Drafts only by default, never sends. External copy goes through external-copy-polish before drafting.
+description: froQ's Fastmail handling over JMAP. Use when froQ wants to read, list, search, or draft email, or needs a reply prepared for him to send. Drafts only by default, never sends. External copy goes through external-copy-polish before drafting.
 license: MIT
 metadata:
   author: froQ
-  version: "0.1.0"
+  version: "0.1.1"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 

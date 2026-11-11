@@ -1,10 +1,10 @@
 ---
 name: froq-create-issue
-description: Draft titles and bodies for new GitHub issues, mainly upstream. Covers template lookup, minimal bug/feature structure, dedup, and delivery format. Claim comments on existing issues belong to froq-os-contrib, not this skill.
+description: Draft a title and body for a new GitHub issue, mainly upstream. Covers template lookup, minimal bug and feature structure, dedup, and delivery format. Use when froQ wants to file an issue, or asks for an issue title or body. Claim comments on existing issues belong to froq-os-contrib.
 license: MIT
 metadata:
   author: froQ
-  version: "0.2.0"
+  version: "0.2.1"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 

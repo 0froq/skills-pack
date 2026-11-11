@@ -1,10 +1,10 @@
 ---
 name: froq-create-pr
-description: Draft PR titles and descriptions for GitHub repos, mainly upstream OSS contributions. Covers the template lookup order, the fallback skeleton, Fixes rules, and the draft-only boundary. Contribution workflow context lives in froq-os-contrib.
+description: Draft a PR title and description for a GitHub repo, mainly upstream OSS contributions. Covers the template lookup order, the fallback skeleton, Fixes rules, and the draft-only boundary. Use when froQ is about to open a PR, asks for a PR description, or wants a compare link. Contribution workflow context lives in froq-os-contrib.
 license: MIT
 metadata:
   author: froQ
-  version: "0.2.0"
+  version: "0.2.1"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 
