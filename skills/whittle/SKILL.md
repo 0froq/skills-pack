@@ -11,7 +11,7 @@ metadata:
 # whittle
 
 Cut uncertainty away until one usable shape is left. A workflow, a file
-format, and a checker. The file is the artifact; the tree is a by-product of
+format, and a checker. The file is the artifact. The tree is a by-product of
 the work, never extra work.
 
 Format spec and grammar: [references/format.md](references/format.md).
@@ -45,8 +45,8 @@ edges:  blocks->A5
 
 ## Edges
 
-Five types. Ordering edges (`blocks`, `needs`) drive the frontier; outcome
-edges (`narrows`, `supersedes`) record what a settle did; `raised-by` records
+Five types. Ordering edges (`blocks`, `needs`) drive the frontier. Outcome
+edges (`narrows`, `supersedes`) record what a settle did. `raised-by` records
 provenance.
 
 | edge | meaning | ordering? |
@@ -74,7 +74,7 @@ implementation last, in the same dependency order.
    settle surfaced as new open nodes, each with `raised-by`.
 4. **Optionally hand off a settled lane.** A fully settled subtree may be
    handed to implementation while other branches stay open. Handoff is a
-   separate ledger (code, PRs, worker sessions); the decisions file does
+   separate ledger of code, PRs, and worker sessions. The decisions file does
    not track implementation progress. One writer per file remains.
 5. **Check.** Run `whittle.sh check` after every settle. Never batch settles
    without a check between them: edges appended blind rot.
@@ -102,8 +102,8 @@ implementation last, in the same dependency order.
 1. Every edge target exists. No duplicate IDs.
 2. Ordering edges are acyclic.
 3. A `settled` node never hangs under an `open` ordering parent.
-4. Every non-root node has an edge; every root has `evidence:`.
-5. Every `settled` node has `decision:`; every `dropped` node has a
+4. Every non-root node has an edge, and every root has `evidence:`.
+5. Every `settled` node has `decision:`. Every `dropped` node has a
    `supersedes` edge pointing at it.
 
 Frontier = open nodes whose ordering parents are all settled. `whittle.sh
@@ -112,7 +112,7 @@ readable at a glance.
 
 ## Visualization
 
-Default render (`whittle.sh tree`) shows open branches expanded one level;
+Default render (`whittle.sh tree`) shows open branches expanded one level.
 settled subtrees collapse to a count. `tree --all` expands everything for a
 final review. A growing tree is never shown in full during the session.
 
@@ -135,14 +135,26 @@ invalidates a settled node, do not reopen it. Append instead:
    conflict). Workers may write finding nodes but never `decision:` fields.
 2. In a settling session, the finding is settled like any frontier node,
    then a superseding node (`supersedes->A`, `raised-by->F`) carries the
-   corrected decision. A drops to `dropped`; its live children re-hang via
+   corrected decision. A drops to `dropped`, and its live children re-hang via
    `narrows`/`blocks` onto the replacement.
 3. Check stays unchanged: the DAG only grows, status flips only go
    forward (open → settled/dropped), never backward.
 
-## Hand-off outside the tree
+## Boundaries
 
-Three things are deliberately not tree-shaped; keep them out of the file:
+- Never reopen a settled node. Append a finding and a superseding node.
+- Worker agents never write `decision:`. They add `open` finding nodes and
+  stop.
+- Never rewrite status backwards. `open` goes to `settled` or `dropped`, never
+  the other way.
+- Never batch settles without running `check` between them.
+- Never keep a node with no edge. Every node enters with an edge on entry.
+- Never settle a new root on a guess. Run a scoped evidence sweep first.
+- Never render the full tree during a session. Settled subtrees collapse.
+
+## Hand-offs
+
+Three things are deliberately not tree-shaped. Keep them out of the file:
 
 - **Implementation lanes.** A settled subtree may be handed off any time,
   and disjoint lanes may run in parallel. Workers get a forbidden-file
@@ -150,6 +162,6 @@ Three things are deliberately not tree-shaped; keep them out of the file:
   nodes back into the file (see above) but never settle. A parent session
   rules on boundary conflicts the workers raise.
 - **Review fan-out.** Parallel reviewers, one angle each, no edits. Report
-  back, don't touch the tree.
+  back and leave the tree alone.
 - **The decision discussion itself.** The file holds outcomes and pointers,
   not the argument. Keep long reasoning in the chat or a linked doc.

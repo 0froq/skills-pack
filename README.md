@@ -1,6 +1,6 @@
 # skills-pack
 
-froQ 自己的 agent skills。`froq-` 前缀标记 froQ 个人工作流/环境类 skill；通用方法论 skill 不带前缀。skill 正文正在从中文迁往英文，单个 skill 内容定稿时顺手翻。
+froQ 自己的 agent skills。`froq-` 前缀标记 froQ 个人工作流/环境类 skill，通用方法论 skill 不带前缀。正文和 description 一律英文。
 
 [0froq/skills](https://github.com/0froq/skills) 是 [antfu/skills](https://github.com/antfu/skills) 的 fork。那边有生成器、git submodule，以及一整份上游文档镜像。`pnpm start cleanup` 会删掉任何没有写进 `meta.ts` `manual` 的目录，手写 skill 也必须套进那四类 taxonomy。这边没有生成器，也没有 `meta.ts`。加一份 skill 就是加一个目录。
 
@@ -23,14 +23,14 @@ pnpx skills add 0froq/skills-pack --skill=froq-stack
 | Skill | |
 | --- | --- |
 | [froq-workbench](skills/froq-workbench) | 环境规范：mo/mise/cf、目录约定、Mini/Air、安全边界 |
-| [froq-os-contrib](skills/froq-os-contrib) | 开源贡献经营：选题、两阶段修程、认领、上游权限边界 |
+| [froq-os-contrib](skills/froq-os-contrib) | 单次开源贡献的执行：选 issue、两阶段修程、认领、上游权限边界 |
 | [froq-create-pr](skills/froq-create-pr) | 起草 PR 标题与描述：模板顺序、fallback 骨架、Fixes 规则 |
 | [froq-create-issue](skills/froq-create-issue) | 起草新 issue：模板、复现结构、查重 |
 | [froq-create-repo](skills/froq-create-repo) | 建 repo 的决策清单与形态路由 |
-| [froq-stack](skills/froq-stack) | 技术栈选型与配置：目录、ESLint、Nuxt、UnoCSS、catalogs |
+| [froq-stack](skills/froq-stack) | 技术栈与配置：目录、runtime、lint/format、Nuxt、UnoCSS、catalogs、脚手架 |
 | [froq-web-app](skills/froq-web-app) | web app 架构与 Cloudflare 发布 |
 | [froq-code-style](skills/froq-code-style) | 编码规范：文件布局、types、测试、catalog、发布 |
-| [froq-longform](skills/froq-longform) | froQ 声音的长文/随笔 + 对外文案 polish |
+| [froq-longform](skills/froq-longform) | froQ 声音的长文/随笔 |
 | [froq-mailman](skills/froq-mailman) | Fastmail 邮件（JMAP）：读、搜、起草，默认不发送 |
 | [froq-design](skills/froq-design) | 设计原则与 UI 审核标准 |
 | [whittle](skills/whittle) | 把开放设计问题收敛为 DAG 并清零 |
@@ -64,7 +64,12 @@ metadata:
 skill 之间平行原子化，靠引导指向串起来：
 
 ```text
-froq-create-repo ──→ froq-stack / froq-web-app / froq-code-style
-froq-os-contrib  ──→ froq-create-pr / froq-create-issue / froq-review(预留)
-froq-os-contrib, froq-mailman ──→ froq-longform（对外草稿 polish）
+froq-create-repo  ──→ froq-stack / froq-web-app / froq-code-style
+froq-os-contrib   ──→ froq-create-pr / froq-create-issue
+froq-os-contrib, froq-create-pr, froq-create-issue, froq-mailman
+                  ──→ external-copy-polish（对外草稿润色）
+froq-stack        ──→ froq-code-style / froq-web-app
+froq-design       ──→ @froq/ui（产品方向实现）
+simplify          ──→ froq-code-style
+froq-longform     ──→ external-copy-polish（转出，不再自带）
 ```
