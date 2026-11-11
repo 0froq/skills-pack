@@ -114,21 +114,22 @@ watch(count, (newVal) => {
 
 ### Class Usage
 
-Write utilities as `class` attributes, not attribute-style (`un-*`):
+`class` is the default for utilities:
 
 ```vue
-<!-- ❌ Attributify -->
-<div
-  un-flex
-  un-items-center
-  un-justify-between
-  un-p-4
-  un-bg-gray-100
->
-
-<!-- ✅ Classes -->
 <div class="flex items-center justify-between p-4 bg-gray-100">
 ```
+
+Attributify is optional, not banned — but when used it must carry the
+`un-` prefix (the project must run `presetAttributify({ prefix: 'un-',
+prefixedOnly: true, strict: true })`). Both forms coexist:
+
+```vue
+<div class="flex items-center gap-2 color-muted" un-p-4>
+```
+
+Never write bare attribute utilities (`<div flex items-center>`) — with
+`prefixedOnly` they silently do nothing.
 
 ### Shortcuts
 

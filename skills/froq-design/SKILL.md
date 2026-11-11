@@ -101,8 +101,10 @@ regression.
 
 ## Writing classes
 
-Utilities go in `class` attributes, not attribute-style (`un-*`). Classes
-are greppable, sortable by lint, and read consistently.
+`class` is the default for utilities: greppable, sortable by lint, reads
+consistently. Attributify is allowed when a project already enables it,
+but only with the `un-` prefix (`prefixedOnly: true`) — bare attributes
+silently do nothing.
 
 ## Boundaries
 

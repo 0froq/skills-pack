@@ -101,11 +101,21 @@ means the class name should be static instead.
 
 ## Classes versus attributify
 
-Write utilities in `class` attributes (`froq-design` / `froq-code-style`
-rule). `0froq.github.io` still carries `presetAttributify` with
-`prefix: 'un-'`, `prefixedOnly: true`, `strict: true` — that config stays
-as-is for the existing markup, but new markup in any repo uses `class`.
-Do not add attributify to a new project.
+`class` is the default. When attributify is used, it must carry the `un-`
+prefix — that is what `presetAttributify` is configured with, and the two
+coexist without conflict:
+
+```vue
+<div class="flex items-center gap-2 color-muted" un-p-4>
+```
+
+`0froq.github.io` keeps `presetAttributify({ prefix: 'un-', prefixedOnly:
+true, strict: true })`. `prefixedOnly` is what makes the rule enforceable:
+an unprefixed attribute silently does nothing. Keep those three options
+whenever attributify is enabled.
+
+Why prefix rather than bare attributes: `un-` cannot collide with real HTML
+attributes or component props, and it is greppable.
 
 ## Content scan
 
