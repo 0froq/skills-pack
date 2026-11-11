@@ -1,10 +1,10 @@
 ---
 name: froq-os-contrib
-description: How an agent executes one commissioned OSS contribution task. Pick an issue worth doing in a named repo, explore-and-fix on the fork, draft the claim comment, and deliver compare links and PR or issue drafts. Use when froQ asks to look at issues, fix an upstream issue, or draft a claim or PR.
+description: Execute one commissioned OSS contribution. Explore and fix a specific upstream issue on your fork, or survey a repo for issues worth doing, then draft the claim comment and deliver a compare link with a PR or issue draft. Use when froQ names an issue or PR and says explore it, look into it, fix it, or take it. Also use when he asks which issues in a repo are worth doing, or wants a claim comment, PR body, or compare link.
 license: MIT
 metadata:
   author: froQ
-  version: "0.3.1"
+  version: "0.3.2"
   source: Migrated from Grok BOT fleet (Patt persona + rules), rescoped to commissioned tasks. https://github.com/0froq/skills-pack
 ---
 
