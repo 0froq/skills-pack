@@ -7,8 +7,7 @@ src/index.ts          source
 test/                 tests and tsnapi snapshots
 tsdown.config.ts      build
 vitest.config.ts
-.oxlintrc.json        plugins: typescript, unicorn, oxc
-.oxfmtrc.json         semi false, singleQuote true
+vite.config.ts        lint + fmt blocks (oxlint-flat-config)
 pnpm-workspace.yaml   catalogs, even for one package
 .github/workflows/ci.yml
 AGENTS.md
