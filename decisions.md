@@ -75,6 +75,7 @@ decision: rewrite README to state the actual rules: `froq-` prefix marks
 
 ## G1  working tree mid-rename
 status: open
+edges:  blocks->R3
 evidence: 44 uncommitted changes. Old-name skills deleted but not committed
           (cloudflare-sites, external-copy-polish, froq-voice-essay, oq,
           stack); new froq-* dirs all untracked; README modified not committed.
@@ -132,11 +133,10 @@ decision: skills for one project's pipeline live in that repo, not in
           second consumer appears.
 
 ## R3  per-skill content review
-status: open
-edges:  blocks->G1
+status: settled
 evidence: 15 skills' frontmatter was unified without content review; user
-          has not manually approved any skill body yet. G1 cannot commit
-          until each is confirmed.
+          had not approved any skill body. Each was then rewritten to
+          TEMPLATE.md, translated to English, and walked through with froQ.
 
 Confirmed so far (English, template-aligned): froq-workbench, froq-code-style,
 froq-create-issue, froq-create-pr, froq-create-repo, froq-design,
@@ -144,8 +144,11 @@ froq-longform, froq-mailman, froq-os-contrib, froq-stack, froq-web-app.
 Removed from scope: feeds-card-copy, froq-briefing, froq-notion-yard
 (N5: bot-routine / project-scoped prompts; notion-yard was redundant
 with the global-prompt Notion contract).
-Remaining: none — lake-paper-academic-advisor moved to the lake repo's
-` .agents/skills/` (project-scoped, N5).
+Remaining: none. lake-paper-academic-advisor moved to the lake repo's
+`.agents/skills/` (project-scoped, N5). A final language pass removed prose
+dashes, semicolons, and colon-style bold labels per the humanizer rules.
+decision: all 14 skills confirmed. froq-review still unwritten, marked as
+          reserved in README.
 
 ## F1  frontmatter spec
 status: settled
