@@ -83,8 +83,10 @@ an offline frozen install. See `overrides.md`.
 ## Repos without Vite+
 
 Use `oxlint.config.ts` at repo root and import `defineConfig` from
-`oxlint-flat-config` (no `/vite-plus` suffix). Same array API, no `fmt`
-block — keep a separate `.oxfmtrc.json` for oxfmt in that case.
+`oxlint-flat-config` (no `/vite-plus` suffix). Same array API, but no
+`fmt` block — oxfmt has its own config. Use `oxfmt.config.ts` (or
+`.oxfmtrc.json`); both are auto-discovered, and TS keeps the two files in
+the same style.
 
 ## Migrated repos
 
