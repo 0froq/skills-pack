@@ -138,10 +138,13 @@ evidence: 15 skills' frontmatter was unified without content review; user
           has not manually approved any skill body yet. G1 cannot commit
           until each is confirmed.
 
-Confirmed so far: froq-workbench (English, confirmed).
+Confirmed so far (English, template-aligned): froq-workbench, froq-code-style,
+froq-create-issue, froq-create-pr, froq-create-repo, froq-design,
+froq-longform, froq-mailman, froq-os-contrib, froq-stack, froq-web-app.
 Removed from scope: feeds-card-copy, froq-briefing, froq-notion-yard
 (N5: bot-routine / project-scoped prompts; notion-yard was redundant
-with the global-prompt Notion contract). Remaining: 12 skills.
+with the global-prompt Notion contract).
+Remaining: lake-paper-academic-advisor.
 
 ## F1  frontmatter spec
 status: settled
