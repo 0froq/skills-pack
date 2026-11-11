@@ -22,6 +22,7 @@ those files" (`froq-code-style`) or "how a repo gets created"
 | TypeScript library published to npm | [references/library.md](references/library.md) |
 | Nuxt app or static site | [references/site.md](references/site.md) |
 | Multiple packages, or a toolchain with Rust crates | [references/monorepo.md](references/monorepo.md) |
+| Starting a new repo | [references/scaffolding.md](references/scaffolding.md) |
 
 ## Config files
 
@@ -33,6 +34,9 @@ those files" (`froq-code-style`) or "how a repo gets created"
 
 Catalogs, git hooks, source-shipping packages, sites, commits:
 [references/overrides.md](references/overrides.md).
+
+Scaffolding — which generator to start from and what to change after:
+[references/scaffolding.md](references/scaffolding.md).
 
 ## Upstream references
 
