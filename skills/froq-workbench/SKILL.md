@@ -1,6 +1,6 @@
 ---
 name: froq-workbench
-description: froQ's environment rules: toolchain (mo, mise, cf), directory conventions (~/code/<owner>/<repo>), machine names (Mini/Air), hard boundaries (no school resources, silent tests). Use when installing tools, running commands, deploying, or cloning repos.
+description: "froQ's environment rules: toolchain (mo, mise, cf), directory conventions (~/code/<owner>/<repo>), machine names (Mini/Air), hard boundaries (no school resources, silent tests). Use when installing tools, running commands, deploying, or cloning repos."
 license: MIT
 metadata:
   author: froQ

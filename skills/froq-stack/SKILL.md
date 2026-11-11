@@ -1,6 +1,6 @@
 ---
 name: froq-stack
-description: froQ's toolchain, repo layouts, and config file shapes: directories, runtime pinning, tsconfig, lint and format, Nuxt, UnoCSS, pnpm catalogs, and scaffolding. Use when creating a repo, adding a tool, or deciding where code and config files go.
+description: "froQ's toolchain, repo layouts, and config file shapes: directories, runtime pinning, tsconfig, lint and format, Nuxt, UnoCSS, pnpm catalogs, and scaffolding. Use when creating a repo, adding a tool, or deciding where code and config files go."
 license: MIT
 metadata:
   author: froQ
