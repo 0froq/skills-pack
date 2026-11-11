@@ -144,7 +144,8 @@ froq-longform, froq-mailman, froq-os-contrib, froq-stack, froq-web-app.
 Removed from scope: feeds-card-copy, froq-briefing, froq-notion-yard
 (N5: bot-routine / project-scoped prompts; notion-yard was redundant
 with the global-prompt Notion contract).
-Remaining: lake-paper-academic-advisor.
+Remaining: none — lake-paper-academic-advisor moved to the lake repo's
+` .agents/skills/` (project-scoped, N5).
 
 ## F1  frontmatter spec
 status: settled
