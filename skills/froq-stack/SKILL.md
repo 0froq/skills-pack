@@ -39,23 +39,6 @@ files" (`froq-code-style`) or "how a repo gets created"
 | Nuxt | [references/nuxt.md](references/nuxt.md) |
 | UnoCSS | [references/unocss.md](references/unocss.md) |
 
-## Taste in one screen
-
-The short version of what the references expand:
-
-- **Config is data, not flags.** Bindings, routes, catalogs, and lint rules
-  live in a config file; `package.json` scripts stay short verbs.
-- **One source per fact.** Breakpoints in one module, versions in catalogs,
-  env in `env.ts`, tool config in `tooling/` when a framework owns the root.
-- **Explicit over implicit.** No path aliases, no auto-import reliance, no
-  default (unnamed) catalog, no hand-edited generated files.
-- **Generated things are checked.** Any `*:generate` script has a
-  `*:check` twin wired into `check`.
-- **Three font stacks, three breakpoints.** Display/text/meta faces, and
-  `sm`/`md`/`lg` only. Extension needs a reason.
-- **Pin, then don't chase.** Node and pnpm are pinned in three places and
-  bumped on purpose, never to match a template.
-
 ## Upstream references
 
 [antfu/starter-ts](https://github.com/antfu/starter-ts) is the layout for a
