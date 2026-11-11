@@ -15,12 +15,12 @@ is the diff.
 
 Other shorthands exist (`vite`, `vue`, `svelte`, `next-app`,
 `react-router`, `@tanstack/start`). Use them only when the repo really is
-that framework — a froQ site is Nuxt or Vite, not Next.
+that framework. A froQ site is Nuxt or Vite, not Next.
 
 `vp create` also accepts `github:user/repo` for a remote template and
 `@org` for an org picker. Reach for those when a specific template is
-worth reusing; do not build a froQ template repo until there are three
-repos that would share it.
+worth reusing. Do not build a froQ template repo until three repos would
+share it.
 
 Non-interactive runs need the flags spelled out:
 
@@ -46,7 +46,7 @@ package.json
 
 - `build` is `vp pack` (tsdown inside), `test` is `vp test`, `check` is
   `vp check`, `prepare` is `vp config`.
-- `pack` block carries `dts.generator: 'tsgo'` and `exports: true`; there
+- `pack` block carries `dts.generator: 'tsgo'` and `exports: true`. There
   is no separate `tsdown.config.ts`.
 - `lint.options` enables `typeAware` and `typeCheck`.
 - The pre-commit hook is `vp staged`, not `lint-staged`.
@@ -64,25 +64,25 @@ pnpm-workspace.yaml packages: apps/*, packages/*, tools/*
   `dev` = `vp run <app>#dev`.
 - `catalogMode: prefer`.
 - Root `lint` adds `jsPlugins` with `vite-plus/oxlint-plugin` and the
-  `vite-plus/prefer-vite-plus-imports` rule — keep it.
+  `vite-plus/prefer-vite-plus-imports` rule. Keep it.
 
 ## Deltas to apply after scaffolding
 
 1. **Named catalogs.** The generators emit a default `catalog:` block.
    froQ uses named catalogs only (`prod`, `dev`), so every generator entry
-   has to move into a category. See `overrides.md` — this is the biggest
+   has to move into a category. See `overrides.md`. This is the biggest
    divergence.
 2. **Lint composition.** The generators emit `lint: { ... }` in vp's native
    object form. Switch to `oxlint-flat-config/vite-plus` if the repo needs
    composable presets. See `lint-format.md`.
-3. **`.gitignore`.** Add what the generator omits — see
+3. **`.gitignore`.** Add what the generator omits. See
    `froq-create-repo/references/setting-up.md`.
 4. **`AGENTS.md`.** Written by hand: how to embed `@froq/ui`, how to push
    and pull from that vendor copy.
 5. **README.** Shape from `froq-create-repo/references/readme/`.
 6. **No `paths` aliases.** Delete any `baseUrl`/`paths` the generator adds.
-7. **`engines`.** `vite:monorepo` sets `node >= 22.18.0`; keep it — the
-   oxlint TS config needs it.
+7. **`engines`.** `vite:monorepo` sets `node >= 22.18.0`. Keep it, because
+   the oxlint TS config needs it.
 
 ## After the first commit
 

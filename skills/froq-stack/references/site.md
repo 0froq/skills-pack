@@ -19,12 +19,12 @@ cloudflare.config.ts  preview adapter
 
 ## package.json
 
-- `"private": true` — a site is never published (unless it really is)
+- `"private": true`. A site is never published unless it really is
 - dependencies point at the repo's catalogs
 - scripts: `dev`, `generate` or `build`, `lint`, `fmt`, `typecheck`,
   `check`, `postinstall` = `nuxt prepare`, `prepare` = `npx simple-git-hooks`
-- `check` chains lint, fmt check, typecheck; add token/generated-file
-  checks when the repo has them
+- `check` chains lint, fmt check, and typecheck. Add token and
+  generated-file checks when the repo has them
 - `test` only when a non-UI package inside the repo has tests:
   `vp test --config tooling/vite.config.ts`
 
@@ -68,8 +68,8 @@ alias: {
 ```
 
 This is package-name aliasing for a vendored dependency, not a `paths`
-alias for own source code — `froq-code-style`'s no-alias rule still holds
-for app code.
+alias for own source code. The no-alias rule in `froq-code-style` still
+holds for app code.
 
 ## Do not add
 

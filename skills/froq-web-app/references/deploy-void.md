@@ -2,7 +2,7 @@
 
 `void` (npm `void`, v1.7.0) is a Cloudflare Workers framework and deploy
 CLI. It builds the project itself, provisions resources, and deploys. Use
-it for a **server** app — Worker plus bindings, Durable Objects, KV,
+it for a **server** app: Worker plus bindings, Durable Objects, KV,
 secrets. A pure static site still uses `cf` (see `deploy-cloudflare.md`).
 
 Reference implementation: `0froq/osdash`.
@@ -34,7 +34,7 @@ export default defineConfig({
 ```
 
 `inference.appType` is one of `void`, `framework`, `spa`, `static`. Nuxt
-maps to `framework`; `static` uploads files with no Worker at all.
+maps to `framework`, while `static` uploads files with no Worker at all.
 
 `void deploy` runs `inference.build` itself. Do not chain a build in front
 of it, and do not run a second build in CI.
@@ -49,7 +49,7 @@ of it, and do not run a second build in CI.
 ```
 
 Production goes through Void. Preview stays on `cf`, with
-`cloudflare.config.ts` as the preview-only adapter — it reads `name`,
+`cloudflare.config.ts` as the preview-only adapter. It reads `name`,
 compatibility date/flags, observability, `workers_dev`, and
 `preview_urls` from `void.config.ts`. It deliberately does **not** copy
 `routes`, so a branch preview never claims the production domain.
@@ -64,9 +64,9 @@ Cloudflare's default makes `preview_urls` follow `workers_dev`, so turning
   `event.context.cloudflare.env`.
 - `vite.config.ts` adds `voidPlugin()`.
 - Nitro does not read `void.config.ts` or `wrangler.config.ts` to decide on
-  Node compatibility — it only scans `wrangler.json`/`.jsonc`/`.toml`.
+  Node compatibility. It only scans `wrangler.json`/`.jsonc`/`.toml`.
   Without one it warns `Node.js compatibility is not enabled`. Set
-  `nitro.cloudflare.nodeCompat: true` in `nuxt.config.ts`; keep
+  `nitro.cloudflare.nodeCompat: true` in `nuxt.config.ts`. Keep
   `compatibility_flags` in the Void config as well, since that is what the
   deploy passes to Cloudflare.
 - `nitro.cloudflare.dev.configPath` points at `./.void-wrangler.jsonc`
@@ -92,12 +92,12 @@ checkout reuse the same namespaces.
 
 ## Workers Builds
 
-- Build command: **empty**. `void deploy` runs `inference.build`;
+- Build command: **empty**. `void deploy` runs `inference.build`, and
   `preview:deploy` runs its own build. Filling it in builds twice.
 - Deploy command: `pnpm exec void deploy --platform cloudflare`.
 - Credentials come from the build environment:
   `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`. Void 1.1.12 uses the
-  token when present and skips `whoami`/login; `WORKERS_CI` is recognized
+  token when present and skips `whoami`/login. `WORKERS_CI` is recognized
   as CI, so it takes the non-interactive path. The account is read from
   `void.lock.json` or the config's `account_id` first, then
   `CLOUDFLARE_ACCOUNT_ID`.

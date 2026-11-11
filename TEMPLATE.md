@@ -1,7 +1,7 @@
 # SKILL.md template
 
 Copy this skeleton for every new skill in this pack. Sections marked
-*(fixed)* keep their exact heading; domain sections are free-form.
+*(fixed)* keep their exact heading. Domain sections are free-form.
 
 ```markdown
 ---
@@ -19,7 +19,7 @@ metadata:
 <one-paragraph positioning: what question this layer answers, what it does
 not answer. Two to four lines.>
 
-## When        (optional; only if description cannot carry the trigger cases)
+## When        (optional, only if description cannot carry the trigger cases)
 
 ## <domain sections>
 
@@ -35,7 +35,7 @@ Write "None" if genuinely nothing, do not delete the section.>
 <which skills this delegates to or is invoked by. One line each.
 Write "None" if standalone.>
 
-## References  (optional; only when references/ exists)
+## References  (optional, only when references/ exists)
 
 <one line per file under references/, name + what it covers>
 ```
@@ -43,7 +43,7 @@ Write "None" if standalone.>
 ## Conventions
 
 - `name` equals the directory name. `froq-` prefix marks froQ-personal
-  workflow/env skills; generic methodology skills carry no prefix.
+  workflow/env skills. Generic methodology skills carry no prefix.
 - `metadata.version` is semver: PATCH for content fixes, MINOR for new
   sections/references, MAJOR at `1.0.0` when stable.
 - Body language follows L1: English is the target, Chinese is transitional.

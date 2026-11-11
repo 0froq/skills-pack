@@ -26,12 +26,12 @@ When fixing one, move the entry into the named catalog and update the
 `catalog:` references in `package.json`. Do not leave the same package in
 both places.
 
-`skilly` and `feeds` have no catalogs at all — fine for a repo with a
-single package and no shared versions.
+`skilly` and `feeds` have no catalogs at all. That is fine for a repo with
+a single package and no shared versions.
 
 Keep `minimumReleaseAgeExcludePrune: true`, `trustPolicy: no-downgrade`,
 and `shellEmulator: true` where already set. Match `onlyBuiltDependencies`
-or `allowBuilds` to the pnpm major already pinned in `packageManager`; do
+or `allowBuilds` to the pnpm major already pinned in `packageManager`. Do
 not bump pnpm to copy a template.
 
 ## Hooks
@@ -60,7 +60,7 @@ a bundled library unless asked.
 
 `vite.config.ts` holds both blocks (see `lint-format.md`). A repo still on
 `.oxlintrc.json` + `.oxfmtrc.json` passes `--config` explicitly and can
-migrate later; do not mix both styles in one repo.
+migrate later. Do not mix both styles in one repo.
 
 ## Sites
 

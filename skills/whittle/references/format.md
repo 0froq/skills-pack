@@ -29,7 +29,7 @@ edgetype:= "blocks" | "needs" | "narrows" | "supersedes" | "raised-by"
 | status | required | forbidden |
 | --- | --- | --- |
 | `open` | none beyond id+title | `decision:` |
-| `settled` | `decision:` | — |
+| `settled` | `decision:` | none |
 | `dropped` | incoming `supersedes` edge | `decision:` |
 
 Roots (no `blocks`/`needs`/`raised-by` parent) must carry `evidence:`.

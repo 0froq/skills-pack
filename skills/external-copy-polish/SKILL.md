@@ -1,6 +1,6 @@
 ---
 name: external-copy-polish
-description: Polish external-facing copy that froQ will send himself — email, issue/PR comments, PR descriptions, short public replies — so it reads like a person wrote it. Governs how the text reads, not what it says. Use before handing over any such draft.
+description: Polish external-facing copy that froQ will send himself, including email, issue and PR comments, PR descriptions, and short public replies, so it reads like a person wrote it. Governs how the text reads rather than what it says. Use before handing over any such draft.
 license: MIT
 metadata:
   author: froQ
@@ -26,17 +26,17 @@ rewrite it himself, the polish failed.
 
 ## Punctuation
 
-1. **Em dash / en dash** — avoid unless truly necessary. Prefer period,
+1. **Em dash / en dash.** Avoid unless truly necessary. Prefer a period,
    comma, or two sentences.
-2. **Semicolon** — rare. Acceptable for a lead-in plus several long parallel
+2. **Semicolon.** Rare. Acceptable for a lead-in plus several long parallel
    items (`First …; Second …; Third …`). Prefer periods or a list when that
    reads cleaner.
-3. **Colon** — restrained. After a colon, continue **the same sentence**
+3. **Colon.** Restrained. After a colon, continue the same sentence
    (`I love three kinds of food: apple, banana, and watermelon.`). Do not
    colon-glue several independent sentences. Exception: attribution
    grammar expects (`X said: …`).
 
-Chinese copy follows the same restraint on `——` and `；`; split long
+Chinese copy follows the same restraint on `——` and `；`. Split long
 sentences instead.
 
 ## Register by occasion
@@ -44,18 +44,18 @@ sentences instead.
 | Occasion | Tone |
 | --- | --- |
 | Formal email, formal long reply | Full spelling, full grammar, polite |
-| Upstream short reply, claim comment, casual PR chatter | Slightly casual is fine (`:)` / `:D` sparingly); complete sentences stay the default |
+| Upstream short reply, claim comment, casual PR chatter | Slightly casual is fine, with `:)` or `:D` used sparingly. Complete sentences stay the default |
 | Never | Mechanical reuse of one line every time (e.g. always the identical `I'll open a PR shortly.`) |
 
-- **Sentence-initial lowercase**: not the default. Occasional use is fine
-  for a standalone one-line paragraph that still reads; normal paragraphs
+- **Sentence-initial lowercase.** Not the default. Occasional use is fine
+  for a standalone one-line paragraph that still reads. Normal paragraphs
   capitalize.
-- **Dropped apostrophes** (`ill`, `dont`): not the default. Rare use only;
-  otherwise keep `I'll` / `don't`.
-- **Claim-style comments**: name the chosen option or impl status, say a PR
+- **Dropped apostrophes** (`ill`, `dont`). Not the default. Rare use only.
+  Otherwise keep `I'll` / `don't`.
+- **Claim-style comments.** Name the chosen option or impl status, say a PR
   is coming, thank when it fits. Rewrite per issue. Do not paste froQ's
   spoken phrasing verbatim.
-- **PR bodies**: structure comes from the repo template, then a repo-owned
+- **PR bodies.** Structure comes from the repo template, then a repo-owned
   skeleton, then `froq-create-pr`'s fallback. This skill only governs how
   the body reads.
 
@@ -68,10 +68,10 @@ shortly` when it is embedded in that comment's context.
 
 Cut instead:
 
-- **Mechanical reuse** of the same opener or closer on every draft.
-- **Empty stacks** of `Hope this helps!` / `Looking forward to your
+- Mechanical reuse of the same opener or closer on every draft.
+- Empty stacks of `Hope this helps!` / `Looking forward to your
   feedback` with no content.
-- **Scripted hype** unrelated to the thread (`Certainly!`, `Absolutely!`,
+- Scripted hype unrelated to the thread (`Certainly!`, `Absolutely!`,
   `Great question!`).
 
 Test: would a real person say this here? Keep. Does it read like a fill-in
@@ -93,7 +93,7 @@ Avoid empty connectors: `Furthermore`, `Moreover`, `Additionally`,
 - Short comments: 1 to 3 natural sentences. Use sections only when the text
   is long.
 - Do not restate an issue description the maintainer already wrote. Claim
-  comments especially; detail belongs in the PR.
+  comments especially. Detail belongs in the PR.
 - No triple-adjective stacks (`clean, elegant, and maintainable`).
 - Avoid stuffing full asides into parentheses, dramatic ellipsis runs, and
   scare-quoting ordinary words.
@@ -125,9 +125,9 @@ continuations or required template fields. Formal complete spelling is the
 default. `Fixes`/`Closes` only in the PR body, never in commits.
 
 **C. Formal email.** Full spelling and grammar, clear structure. Polite
-open and close are fine when they carry meaning; no empty stock stacks.
-Still sparse em dashes and careful `;` `:`. Sign-off and address form match
-the relationship and whatever identity froQ uses there.
+open and close are fine when they carry meaning, and empty stock stacks are
+not. Keep dashes sparse and `;` and `:` careful. Sign-off and address form
+match the relationship and the identity froQ uses there.
 
 **D. Other external shorts.** Match the audience: familiar OSS reads like A,
 professors or official or business reads like C.
@@ -145,10 +145,10 @@ professors or official or business reads like C.
 - **Never send.** Drafts go to froQ, who sends from the web UI, unless the
   calling skill already permits posting (froQ's own repos, agreed derived
   PRs).
-- Does not decide content, claims, or commitments — only how the copy reads.
+- Does not decide content, claims, or commitments. Only how the copy reads.
 - Not for internal notes, commit messages, TODOs, logs, group status
   reports, or agent-to-froQ chat.
-- Not for in-group Chinese status updates; those are not external.
+- Not for in-group Chinese status updates, which are not external.
 
 ## Hand-offs
 

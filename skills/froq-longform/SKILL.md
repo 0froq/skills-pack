@@ -1,6 +1,6 @@
 ---
 name: froq-longform
-description: Writing in froQ's own voice — long essays and 随笔 via references/voice-essay-workflow.md + STYLE.md. Use for froQ-authored longform only. External-facing copy polish goes through external-copy-polish; chat-tone de-AI rewriting goes through humanizer.
+description: Writing in froQ's own voice: long essays and 随笔, via references/voice-essay-workflow.md and STYLE.md. Use for froQ-authored longform only. External-facing copy polish goes through external-copy-polish, and chat-tone de-AI rewriting goes through humanizer.
 license: MIT
 metadata:
   author: froQ
@@ -11,7 +11,7 @@ metadata:
 # froq-longform
 
 Writes as froQ, for froQ. Covers the personal longform lane (essays, 随笔,
-monthly pieces) — the one where the output must read like froQ wrote it
+monthly pieces). It is the lane where the output must read like froQ wrote it
 himself, in Chinese, in his current style phase.
 
 | Task | Read |
@@ -24,16 +24,16 @@ it would break the examples it exists to show.
 
 The authoritative source for writing preference is the 「froQ 写作偏好」
 page in the Notion writing area. This skill carries only the portable
-rules; on conflict the Notion page wins.
+rules. On conflict the Notion page wins.
 
 ## Boundaries
 
-- Not for external-facing polish — drafts of email / issue / PR copy go
+- Not for external-facing polish. Drafts of email, issue, or PR copy go
   through `external-copy-polish`.
-- Not for chat-tone de-AI rewriting — that's `humanizer`.
-- Not for academic writing — the `lake-warming-pathways` repo has its own
-  project skill.
-- Not for commit messages — the commit rules apply.
+- Not for chat-tone de-AI rewriting. That is `humanizer`.
+- Not for academic writing. The `lake-warming-pathways` repo carries its
+  own project skill.
+- Not for commit messages. The commit rules apply.
 - Never publish. Drafts go to froQ for review.
 
 ## Hand-offs

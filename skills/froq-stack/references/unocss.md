@@ -4,7 +4,7 @@ Default for a new froQ site: `@froq/ui` plus plain CSS. Do not add UnoCSS
 to it.
 
 Existing sites keep it. `0froq.github.io` runs `uno.config.mts`, `feeds`
-runs `uno.config.ts`. Keep those configs where they are; do not copy them
+runs `uno.config.ts`. Keep those configs where they are. Do not copy them
 into `lig`, `ui`, or a new project.
 
 ## Shape
@@ -41,8 +41,8 @@ export default defineConfig({
 Only `sm`, `md`, `lg`. Do not add `xl`, `2xl`, or extra pixel cuts. Width
 responsive utilities are `sm:` `md:` `lg:` `max-sm:` `max-md:` `max-lg:`
 and nothing else. Keep the numbers in one file (`app/utils/breakpoints.ts`
-in `0froq.github.io`) and read them into `theme.breakpoint` — do not
-repeat literals in config and components.
+in `0froq.github.io`) and read them into `theme.breakpoint`. Do not repeat
+literals in config and components.
 
 ## Tokens bridge, never raw colors
 
@@ -84,8 +84,8 @@ presetIcons({
 
 Declare only the collections in use, each as a lazy import, so icons stay
 out of the initial bundle. `feeds` uses `autoInstall: true` with the
-collection list commented out — fine for a site that does not care about
-bundle size.
+collection list commented out. That is fine for a site that does not care
+about bundle size.
 
 ## Safelist
 
@@ -102,7 +102,7 @@ means the class name should be static instead.
 ## Classes versus attributify
 
 `class` is the default. When attributify is used, it must carry the `un-`
-prefix — that is what `presetAttributify` is configured with, and the two
+prefix. That is what `presetAttributify` is configured with, and the two
 coexist without conflict:
 
 ```vue

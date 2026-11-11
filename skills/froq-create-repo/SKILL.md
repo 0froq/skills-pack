@@ -1,6 +1,6 @@
 ---
 name: froq-create-repo
-description: Decision checklist and form routing for creating new froQ repositories. Use before creating any repo — gather license, README, form (package / web app / monorepo / docs / other), stack direction, then hand off to the matching spoke skill.
+description: Decision checklist and form routing for creating new froQ repositories. Use before creating any repo. Gather license, README, form (package, web app, monorepo, docs, or other), and stack direction, then hand off to the matching skill.
 license: MIT
 metadata:
   author: froQ
@@ -11,7 +11,7 @@ metadata:
 # froq-create-repo
 
 Entry skill for creating a repo. Its only job is **asking everything and
-routing** — directory structure and config live in `froq-stack` and the
+routing. Directory structure and config live in `froq-stack` and the
 per-form skills.
 
 ## Questions to ask first
@@ -39,12 +39,12 @@ Confirm before creating (ask, never guess):
 | docs site | `froq-stack` `references/site.md` (VitePress vs Nuxt, ask first) |
 
 Shared tool config (lint/format, UnoCSS, catalogs, hooks) lives in
-`froq-stack` — not duplicated in the form skills.
+`froq-stack` and is not duplicated in the form skills.
 
 ## Boundaries
 
 - Never generate a directory before the form is confirmed.
-- No concrete config here — point at `froq-stack`.
+- No concrete config here. Point at `froq-stack`.
 
 ## Hand-offs
 

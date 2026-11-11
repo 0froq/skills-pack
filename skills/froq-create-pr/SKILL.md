@@ -11,13 +11,13 @@ metadata:
 # froq-create-pr
 
 Draft PR titles and descriptions. froQ opens the PR from the web UI by
-hand — the agent produces the draft and links, never `gh pr create`.
+hand. The agent produces the draft and links, never `gh pr create`.
 
 ## Structure order
 
 1. **Upstream template first.** Check `.github/PULL_REQUEST_TEMPLATE*.md`
    and the org `.github` repo. If a template exists, fill its fields in
-   order; add or remove no headings.
+   order. Add or remove no headings.
 2. **Repo-level skeleton.** If the contribution repo keeps its own fixed
    skeleton (registered in `froq-os-contrib`'s contribution log), it
    overrides the default.
@@ -30,18 +30,18 @@ Same repo, same structure on every PR. No per-run improvisation.
 
 ## Body rules
 
-- `Fixes #N` / `Closes #N` goes **only in the PR body**, short `#N` form —
-  never full issue URLs, never in commit messages.
+- `Fixes #N` / `Closes #N` goes **only in the PR body**, short `#N` form.
+  Never a full issue URL, never in a commit message.
 - English, concise: what/why first, how-tested after. Do not restate
   symptoms the issue already covers.
 - Polish through `external-copy-polish` before handoff.
 - Deliver as a fenced code block plus a compare link (base = merge-base,
   head = tip), with the PR/issue Markdown link at the top of the message.
-- Author stays `0froq <sayhola@froq.me>` — no agent attribution.
+- Author stays `0froq <sayhola@froq.me>`. No agent attribution.
 
 ## Boundaries
 
-- Never `gh pr create` upstream — froQ opens by hand.
+- Never `gh pr create` upstream. froQ opens by hand.
 - No tip-commit + `?expand=1` description dumps.
 - No upstream issue mentions in commits.
 - Workflow layer (pick work, claim, two-phase fixing, permission edges)

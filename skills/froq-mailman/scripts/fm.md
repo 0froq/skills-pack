@@ -1,4 +1,4 @@
-# fm — Fastmail JMAP CLI
+# fm: Fastmail JMAP CLI
 
 `fm` is implemented ([fm](fm), Python 3 stdlib, executable).
 
@@ -12,4 +12,5 @@ Privacy & Security → Connected apps & API tokens.
 
 ## Scope
 
-Read, list, search, draft. No `send` — the skill boundary is draft-only.
+Read, list, search, draft. No `send`, because the skill boundary is
+draft-only.

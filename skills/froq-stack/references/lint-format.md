@@ -29,9 +29,9 @@ export default defineConfig({
 })
 ```
 
-Import `defineConfig` from `oxlint-flat-config/vite-plus`, not `vite-plus` —
-that is what makes `lint` take a flat array. Everything else is passed to
-Vite+ unchanged. Do not install `oxlint`; Vite+ ships its own copy.
+Import `defineConfig` from `oxlint-flat-config/vite-plus`, not `vite-plus`.
+That import is what makes `lint` take a flat array. Everything else is passed to
+Vite+ unchanged. Do not install `oxlint`. Vite+ ships its own copy.
 
 ## Composing rules
 
@@ -46,18 +46,18 @@ flatten, falsy entries are skipped.
 
 Two fields you may expect are absent on purpose:
 
-- **No `categories`** — use the `category()` helper, e.g.
+- **No `categories`.** Use the `category()` helper, e.g.
   `category({ correctness: 'error' })`.
-- **No `plugins`** — every built-in oxlint plugin is enabled.
+- **No `plugins`.** Every built-in oxlint plugin is enabled.
 
-`settings` and `options` are root-only; a scoped config cannot set them.
+`settings` and `options` are root-only. A scoped config cannot set them.
 Paths in `files`/`ignores` are relative to `vite.config.ts`.
 
 ## Monorepo
 
 `vp check` always uses the `lint` block of the workspace root config, and
 Vite+ disables nested lint configs. In a monorepo, express per-package
-differences in the root config with `files` or `basePath` — not with a
+differences in the root config with `files` or `basePath`, never with a
 `lint` block in each package.
 
 ## Scripts
@@ -84,8 +84,8 @@ an offline frozen install. See `overrides.md`.
 
 Use `oxlint.config.ts` at repo root and import `defineConfig` from
 `oxlint-flat-config` (no `/vite-plus` suffix). Same array API, but no
-`fmt` block — oxfmt has its own config. Use `oxfmt.config.ts` (or
-`.oxfmtrc.json`); both are auto-discovered, and TS keeps the two files in
+`fmt` block. Oxfmt has its own config. Use `oxfmt.config.ts` (or
+`.oxfmtrc.json`). Both are auto-discovered, and TS keeps the two files in
 the same style.
 
 ## Migrated repos

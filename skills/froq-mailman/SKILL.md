@@ -1,6 +1,6 @@
 ---
 name: froq-mailman
-description: froQ's Fastmail handling over JMAP — read, list, search, draft emails. Drafts only by default, never sends. External copy goes through external-copy-polish before drafting.
+description: froQ's Fastmail handling over JMAP: read, list, search, and draft emails. Drafts only by default, never sends. External copy goes through external-copy-polish before drafting.
 license: MIT
 metadata:
   author: froQ
@@ -12,17 +12,18 @@ metadata:
 
 Fastmail over JMAP via `scripts/fm` (Python 3 stdlib, no deps). Covers
 reading, listing, searching, and drafting. Sending is not implemented on
-purpose — see Boundaries.
+purpose. See Boundaries.
 
 ## Auth
 
-Fastmail **API token** (not app password — JMAP endpoint is Bearer-only).
+Fastmail **API token**, not an app password. The JMAP endpoint is
+Bearer-only.
 Create in Fastmail → Settings → Privacy & Security → Connected apps & API
 tokens, with Mail read + write scope.
 
 Stored in macOS keychain item `fastmail-jmap` (account = Fastmail address,
 password = the `fmu1-...` token), or env `FASTMAIL_JMAP_TOKEN`. Scripts read
-the keychain at runtime; the token never enters the repo or logs.
+the keychain at runtime. The token never enters the repo or logs.
 
 ## Commands
 
@@ -43,14 +44,14 @@ subcommand.
   Chinese: relaxed but not greasy.
 - Sign-off and salutation match the recipient relationship.
 - External-facing drafts go through `external-copy-polish` before `fm draft`.
-- Quote only the relevant section when replying — no full-thread quotes.
+- Quote only the relevant section when replying. No full-thread quotes.
 
 ## Boundaries
 
 - **Draft only, never send.** Output is a JMAP draft or a fenced body for
   froQ to paste. Actually sending requires froQ's explicit "send".
 - No deleting mail, no mailbox/label structure changes, unless froQ asks.
-- Token stays in keychain — never in repo, files, or command logs.
+- Token stays in the keychain, never in the repo, files, or command logs.
 
 ## Hand-offs
 

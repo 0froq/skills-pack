@@ -1,7 +1,7 @@
 # Nuxt
 
 Nuxt 4 layout: `app/` holds pages and components, `server/` holds routes.
-`nuxt.config.ts` never carries lint or format config — that lives in
+`nuxt.config.ts` never carries lint or format config. That lives in
 `vite.config.ts`.
 
 ## Modules
@@ -33,7 +33,7 @@ css: [
 
 Fonts are three stacks declared in `tokens.css`: display (Instrument
 Serif), text (Geist), meta (Geist Mono). Do not add a fourth without a
-reason — see `froq-design`.
+reason. See `froq-design`.
 
 ## i18n
 
@@ -44,9 +44,9 @@ reason — see `froq-design`.
 
 When `@froq/ui` is vendored at `vendor/ui`, alias the package name at the
 vendored source in `nuxt.config.ts`, including `style.css` and
-`tokens.css` — see `site.md`. `lig` also aliases the library's own
+`tokens.css`. See `site.md`. `lig` also aliases the library's own
 dependencies (`reka-ui`, `@internationalized/date`) out of the installed
-copy so pnpm resolves them; do the same when a vendored library pulls
+copy so pnpm resolves them. Do the same when a vendored library pulls
 runtime deps.
 
 ## Other config

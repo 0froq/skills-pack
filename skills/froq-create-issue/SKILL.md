@@ -10,27 +10,27 @@ metadata:
 
 # froq-create-issue
 
-Draft new issues. froQ submits by hand — the agent produces the draft only.
+Draft new issues. froQ submits by hand. The agent produces the draft only.
 
 ## Structure order
 
 1. **Upstream template first.** Check `.github/ISSUE_TEMPLATE/`. If a
-   template exists, fill its fields exactly; pick the type (bug / feature)
+   template exists, fill its fields exactly. Pick the type (bug or feature)
    the template offers.
-2. **No template — minimal structure:**
+2. **No template.** Minimal structure:
    - Bug: `## Summary` (one-line symptom) → `## Reproduction` (minimal,
      runnable) → `## Expected` / `## Actual` → `## Environment`
      (versions, platform).
    - Feature: `## Summary` → `## Motivation` (what is impossible today)
-     → `## Proposal` (one-line idea; details can follow).
+     → `## Proposal` (one-line idea, details can follow).
 3. **Dedup first.** Search open and closed upstream issues. If a match
-   exists, do not open a new one — add information under the existing
-   issue instead.
+   exists, do not open a new one. Add information under the existing issue
+   instead.
 
 ## Body rules
 
-- English, concise. No unrelated context, no solution pile-up — the issue
-  states the problem; design discussion belongs in comments or a PR.
+- English, concise. No unrelated context and no solution pile-up. The issue
+  states the problem. Design discussion belongs in comments or a PR.
 - Reproduction over prose. A runnable minimal repro (command, code block,
   or a link to a branch on the user's fork) beats a long description.
 - Polish through `external-copy-polish` before handing over.
@@ -40,9 +40,9 @@ Draft new issues. froQ submits by hand — the agent produces the draft only.
 
 ## Boundaries
 
-- Never open issues upstream directly — froQ submits.
-- Claim comments on existing issues (`I'm working on it.`) are not here;
-  they live in `froq-os-contrib`.
+- Never open issues upstream directly. froQ submits.
+- Claim comments on existing issues (`I'm working on it.`) are not here.
+  They live in `froq-os-contrib`.
 
 ## Hand-offs
 

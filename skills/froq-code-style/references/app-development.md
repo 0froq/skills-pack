@@ -120,7 +120,7 @@ watch(count, (newVal) => {
 <div class="flex items-center justify-between p-4 bg-gray-100">
 ```
 
-Attributify is optional, not banned — but when used it must carry the
+Attributify is optional rather than banned, but when used it must carry the
 `un-` prefix (the project must run `presetAttributify({ prefix: 'un-',
 prefixedOnly: true, strict: true })`). Both forms coexist:
 
@@ -128,7 +128,7 @@ prefixedOnly: true, strict: true })`). Both forms coexist:
 <div class="flex items-center gap-2 color-muted" un-p-4>
 ```
 
-Never write bare attribute utilities (`<div flex items-center>`) — with
+Never write bare attribute utilities (`<div flex items-center>`). With
 `prefixedOnly` they silently do nothing.
 
 ### Shortcuts
@@ -207,7 +207,7 @@ export default defineEventHandler(async (event) => {
 ### Composables
 
 Place in `composables/` per Nuxt convention, but call them through
-explicit `import` statements — no reliance on auto-import in business
+explicit `import` statements, with no reliance on auto-import in business
 code (see Explicitness in SKILL.md):
 
 ```ts

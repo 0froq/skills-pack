@@ -1,6 +1,6 @@
 ---
 name: froq-stack
-description: froQ's toolchain, repo layouts, and config file shapes — directories, runtime pinning, tsconfig, lint/format, Nuxt, UnoCSS, pnpm catalogs, scaffolding. Use when creating a repo, adding a tool, or deciding where code and config files go.
+description: froQ's toolchain, repo layouts, and config file shapes: directories, runtime pinning, tsconfig, lint and format, Nuxt, UnoCSS, pnpm catalogs, and scaffolding. Use when creating a repo, adding a tool, or deciding where code and config files go.
 license: MIT
 metadata:
   author: froQ
@@ -51,9 +51,9 @@ into a site or a plain library.
 
 - No copying a Rust toolchain layout into a JS-only repo.
 - No Turborepo until pnpm filters are demonstrably too slow.
-- No UnoCSS on new sites; `@froq/ui` plus plain CSS.
+- No UnoCSS on new sites. Use `@froq/ui` plus plain CSS.
 - No mixing ESLint and oxlint in one repo.
-- No default `catalog:` entries — every version has a category.
+- No default `catalog:` entries. Every version has a category.
 - No hand-edited generated files.
 
 ## Hand-offs

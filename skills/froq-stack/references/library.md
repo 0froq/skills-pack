@@ -13,7 +13,7 @@ pnpm-workspace.yaml   catalogs, even for one package
 AGENTS.md
 ```
 
-There is no `tsdown.config.ts` — `vp pack` carries the build config in the
+There is no `tsdown.config.ts`. `vp pack` carries the build config in the
 `pack` block of `vite.config.ts`:
 
 ```ts
@@ -37,8 +37,8 @@ pack: {
 
 ## Tests
 
-`tests/` at the package root, or `foo.test.ts` next to `foo.ts` — pick per
-repo and keep it. Snapshot outputs that are large or language-specific via
+`tests/` at the package root, or `foo.test.ts` next to `foo.ts`. Pick one
+per repo and keep it. Snapshot outputs that are large or language-specific via
 `toMatchFileSnapshot`.
 
 ## Catalogs
@@ -46,7 +46,7 @@ repo and keep it. Snapshot outputs that are large or language-specific via
 `pnpm-workspace.yaml` uses named catalogs and one of
 `ignoreWorkspaceRootCheck: true` or `packages: ['.']` so a single-package
 repo still gets catalog resolution. Names as in `overrides.md`
-(`prod` / `dev`; add `inlined` / `frontend` only when a repo needs that
+(`prod` / `dev`, adding `inlined` / `frontend` only when a repo needs that
 split), never the default `catalog:` that the generator emits.
 
 ## CI
@@ -57,8 +57,8 @@ repeats `check`.
 ## Release
 
 First npm publish is manual so a Trusted Publisher can be attached. Later
-releases go through `vp run release` (bumpp) plus the release workflow —
-see `froq-code-style/references/release-workflow.md`.
+releases go through `vp run release` (bumpp) plus the release workflow. See
+`froq-code-style/references/release-workflow.md`.
 
 ## Not this shape
 

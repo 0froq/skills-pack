@@ -13,8 +13,8 @@ package.json         "packageManager": "pnpm@12.11.2"
 ```
 
 `mise.toml` is what actually selects the runtime locally. `engines` states
-the supported range (current froQ repos: `^24.21.0 || >=26.0.0`; older
-ones still say `>=22.18.0`). `packageManager` pins pnpm; a **published**
+the supported range (current froQ repos: `^24.21.0 || >=26.0.0`, while older
+ones still say `>=22.18.0`). `packageManager` pins pnpm. A **published**
 library can include the integrity hash
 (`pnpm@12.11.2+sha512.…`), a private site does not need it.
 
@@ -23,7 +23,7 @@ Do not bump pnpm to match a template. `onlyBuiltDependencies` /
 
 ## tsconfig
 
-**Nuxt repo** — project references only, nothing else:
+**Nuxt repo.** Project references only, nothing else:
 
 ```json
 {
@@ -40,7 +40,7 @@ Do not bump pnpm to match a template. `onlyBuiltDependencies` /
 Nuxt generates the real configs. Adding `paths` or `baseUrl` here fights
 the generator and breaks `nuxt typecheck`.
 
-**Library / plain TS repo** — explicit strict config:
+**Library or plain TS repo.** Explicit strict config:
 
 ```json
 {
@@ -60,8 +60,8 @@ the generator and breaks `nuxt typecheck`.
 }
 ```
 
-`noUncheckedIndexedAccess` and `verbatimModuleSyntax` are on by choice —
-keep them. No `paths`, no `baseUrl`.
+`noUncheckedIndexedAccess` and `verbatimModuleSyntax` are on by choice.
+Keep them. No `paths`, no `baseUrl`.
 
 ## `tooling/`
 
@@ -102,15 +102,15 @@ export default defineEnv({
 })
 ```
 
-Optional secrets are `.optional()`; everything else fails fast when
+Optional secrets are `.optional()`. Everything else fails fast when
 missing.
 
 ## `shared/`
 
 Pure logic used by more than one side (client and server, or app and
 script) goes in `shared/`, one concept per file, test next to it:
-`claim.ts` + `claim.test.ts`. No framework imports there — if a file needs
-`useState` or `defineEventHandler`, it belongs in `app/` or `server/`.
+`claim.ts` + `claim.test.ts`. No framework imports there. A file that needs
+`useState` or `defineEventHandler` belongs in `app/` or `server/`.
 
 `core/` is different: it holds the spec a repo owns and others generate
 from (`lig` generates editor ports from `core/`). Only give a site a
@@ -130,7 +130,7 @@ build  dev  generate  preview  deploy  typecheck  lint  fmt  check
 `check` includes the `*:check` scripts so CI catches an un-regenerated
 file.
 
-`postinstall` is `nuxt prepare` on a Nuxt repo; `prepare` installs hooks.
+`postinstall` is `nuxt prepare` on a Nuxt repo. `prepare` installs hooks.
 `preview:deploy` deploys a preview build.
 
 ## `.gitignore` baseline
@@ -151,5 +151,5 @@ Add repo-specific ignores last, with a comment saying why (e.g.
 
 A Cloudflare Worker app declares bindings and routes in `void.config.ts`
 and keeps `cloudflare.config.ts` as the preview adapter. Both are
-described in `froq-web-app`; the point here is that deploy config is data,
+described in `froq-web-app`. The point here is that deploy config is data,
 not a script with flags scattered across `package.json`.

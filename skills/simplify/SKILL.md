@@ -10,9 +10,9 @@ metadata:
 
 # simplify
 
-Shrink a diff to the fewest concepts a reader must hold. Method: ablation —
-remove each piece the diff adds and see what concretely breaks. Keep only
-what earns its place.
+Shrink a diff to the fewest concepts a reader must hold. The method is
+ablation: remove each piece the diff adds and see what concretely breaks.
+Keep only what earns its place.
 
 ## When
 
@@ -23,7 +23,7 @@ not touch.
 ## Loop
 
 1. **Read the diff.** Merge base against the PR target, or `git diff HEAD`
-   for uncommitted work. Write the change's goal in one sentence — that
+   for uncommitted work. Write the change's goal in one sentence. That
    sentence decides every case below.
 2. **Inventory.** List each unit the diff introduces: function, parameter,
    option, branch, type, file, dependency, abstraction, comment, test.
@@ -31,7 +31,7 @@ not touch.
    section.
 4. **Apply in batches.** After each batch run the repo's `check` script
    (`froq-stack` defines it as lint + format + typecheck + tests). Revert
-   what breaks — that piece is now proven needed.
+   what breaks. That piece is now proven needed.
 5. **Report.** One table of what was cut or kept and why, plus
    `git diff --stat` before and after. No commit unless asked.
 
@@ -55,15 +55,15 @@ Three things the table cannot say:
   unused options, hooks, plugin points, "just in case" generics.
 - **Abstraction earns its size.** The third repetition gets extracted. The
   first and second do not. A good abstraction removes more code than it
-  adds — that is the only test that matters.
-- **Every cut is verified.** Run `check` after each batch; revert what
+  adds. That is the only test that matters.
+- **Every cut is verified.** Run `check` after each batch. Revert what
   breaks instead of reasoning about it.
 
 ## Smells
 
 - Patches the symptom at the call site instead of the cause.
 - A special case (`if (name === 'foo')`) where a general rule would cover it.
-- Two near-identical paths; unify them.
+- Two near-identical paths that should be one.
 - State or caches derivable from existing data.
 - Hand-derived types where `typeof` / `ReturnType` / `Parameters` suffice.
 - Tests asserting implementation details or mirroring the code line by line.

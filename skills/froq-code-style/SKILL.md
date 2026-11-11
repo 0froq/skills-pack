@@ -1,6 +1,6 @@
 ---
 name: froq-code-style
-description: froQ's coding conventions for JavaScript and TypeScript. Use for file layout inside a module, imports, types, tests, catalogs, and releases. Tool config files (oxlint/oxfmt, Nuxt, UnoCSS) live in froq-stack; one-time repo scaffolding lives in froq-create-repo.
+description: froQ's coding conventions for JavaScript and TypeScript. Use for file layout inside a module, imports, types, tests, catalogs, and releases. Tool config files (oxlint/oxfmt, Nuxt, UnoCSS) live in froq-stack. One-time repo scaffolding lives in froq-create-repo.
 license: MIT
 metadata:
   author: froQ
@@ -19,10 +19,10 @@ config file shapes (`froq-stack`) or one-time scaffolding files
 
 ### Code Organization
 
-- **Single responsibility**: each source file has a clear, focused scope
-- **Split large files**: break files when they grow or take on extra concerns
-- **Type separation**: keep types and interfaces in `types.ts` or `types/*.ts`
-- **Constants extraction**: move constants to a dedicated `constants.ts`
+- **Single responsibility.** Each source file has a clear, focused scope
+- **Split large files.** Break files when they grow or take on extra concerns
+- **Type separation.** Keep types and interfaces in `types.ts` or `types/*.ts`
+- **Constants extraction.** Move constants to a dedicated `constants.ts`
 
 ### Runtime Environment
 
@@ -45,8 +45,8 @@ should follow where every name comes from without running tooling.
   directories) still apply, but importing is explicit.
 - **No path aliases.** Use relative imports (`./foo`, `../bar`). Do not add
   `paths` mappings or `@/`/`~/` aliases. Workspace package-name aliases
-  inside a monorepo (`@myorg/core`) are fine — those are package names,
-  not path aliases.
+  inside a monorepo (`@myorg/core`) are fine. Those are package names, not
+  path aliases.
 
 ### TypeScript
 
@@ -55,7 +55,7 @@ should follow where every name comes from without running tooling.
 
 ### Comments
 
-- Code should be self-explanatory; comments explain "why", not "how"
+- Code should be self-explanatory. Comments explain "why", not "how"
 
 ### Testing (Vitest)
 
@@ -70,14 +70,15 @@ should follow where every name comes from without running tooling.
 
 ### Commands
 
-`vp` (vite-plus) is the toolchain shell where a repo has migrated to it;
-`@antfu/ni` commands (`ni`, `nr`, `nu`, `nun`, `nci`, `nlx`) elsewhere.
-pnpm is the package manager underneath either way.
+`vp` (vite-plus) is the toolchain shell in a repo that has migrated to it.
+Other repos use the `@antfu/ni` commands (`ni`, `nr`, `nu`, `nun`, `nci`,
+`nlx`). pnpm is the package manager underneath either way.
 
 ### Checking npm package versions
 
 Use [`fast-npm-meta`](https://github.com/antfu/fast-npm-meta) instead of
-`npm view` — one metadata call, not the full registry payload:
+`npm view`. It makes one metadata call instead of pulling the full registry
+payload:
 
 ```bash
 nlx fast-npm-meta version vite              # latest version
@@ -88,26 +89,26 @@ nlx fast-npm-meta version vite nuxt vue     # multiple at once
 ### Knip
 
 Use [Knip](https://knip.dev) to catch unused files, exports, and
-dependencies — linters see one file at a time, Knip sees the graph:
+dependencies. Linters see one file at a time, Knip sees the graph:
 
 ```json
 // knip.json
 { "$schema": "https://unpkg.com/knip@6/schema.json", "project": ["src/**/*.ts"] }
 ```
 
-Fix reports by deleting; use `ignoreDependencies` only for tools invoked
+Fix reports by deleting. Use `ignoreDependencies` only for tools invoked
 outside package.json scripts.
 
 ### The `ci` gate
 
 Every repo exposes one `ci` script that runs all checks in a single
 command (lint + format check + typecheck + knip + tests). Run it before
-committing; do not commit on a failing `ci` — fix the cause, not the rule.
+committing. Do not commit on a failing `ci`. Fix the cause, not the rule.
 
 ### Git hooks
 
-Pre-commit runs lint and format on staged files. The tool varies per repo
-(`vp staged`, `lint-staged`); the rule does not.
+Pre-commit runs lint and format on staged files. The tool varies per repo,
+`vp staged` or `lint-staged`. The rule does not.
 
 ### TypeScript config
 

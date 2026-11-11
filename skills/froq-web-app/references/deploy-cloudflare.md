@@ -15,15 +15,15 @@ deploy setups of `void`, `paper-landing`, or `lig`. Reference sample:
 - `lig`: no deploy config of its own.
 
 New sites and sites migrating off Pages both follow this reference. On
-migration, create a new Worker — do not reuse the Pages project, the
+migration, create a new Worker. Do not reuse the Pages project, the
 repo's API token, or `preset: 'cloudflare_pages'`.
 
 ## Pages is closed to new work
 
-`cf` cannot create a Pages project; the console entry is gone. Cloudflare
+`cf` cannot create a Pages project, and the console entry is gone. Cloudflare
 still says existing Pages projects stay up, but new projects start on
 Workers. Static asset requests on Workers are not billed per request, same
-as Pages. `wrangler pages project create` still exists; that is not the
+as Pages. `wrangler pages project create` still exists, but that is not the
 path for a new site.
 
 ## When a repo already has wrangler config
@@ -33,7 +33,7 @@ The repo has `wrangler.jsonc` or `wrangler.toml` and no
 
 1. Working tree must be clean. `cf migrate` stops on a dirty tree unless
    you pass `--force`.
-2. Install wrangler, at least 4.136 — `cf`'s Wrangler bundler needs it.
+2. Install wrangler, at least 4.136. `cf`'s Wrangler bundler needs it.
 3. Run `cf migrate`. It writes `cloudflare.config.ts`. Without
    `@cloudflare/vite-plugin`, the assets directory goes in
    `wrangler.config.ts` under `assetsDirectory`.
@@ -42,7 +42,7 @@ The repo has `wrangler.jsonc` or `wrangler.toml` and no
 5. Delete `wrangler.jsonc` only after `cf deploy --dry-run` passes.
 
 With no `cloudflare.config.ts` yet, do not run `cf init`, `cf dev`,
-`cf build`, or `cf deploy` — they do not read `wrangler.jsonc` and may
+`cf build`, or `cf deploy`. They do not read `wrangler.jsonc` and may
 rewrite the config.
 
 ## Nuxt static site
@@ -80,7 +80,7 @@ export default defineConfig({
 ```
 
 `wrangler.config.ts` holds only the build-side assets directory. It is not
-Pages config — never write `pages_build_output_dir` there.
+Pages config. Never write `pages_build_output_dir` there.
 
 ```ts
 import { defineWranglerConfig } from 'wrangler/experimental-config'
@@ -100,7 +100,7 @@ Keep `dev`, `build`, `generate` in `package.json` and add:
 
 `cf build` and `cf deploy` do not run `package.json` scripts, so generation
 has to be chained in front. Do not replace `pnpm dev` with `cf dev`. Do not
-add a `cf:build` script. Deploy and preview with `cf` only — no wrangler,
+add a `cf:build` script. Deploy and preview with `cf` only, with no wrangler,
 no `wrangler build --x-cf-build-output`, no `--prebuilt`.
 `cf previews deploy --prebuilt` fails: prebuilt output is not a preview
 build.
@@ -111,7 +111,7 @@ Nuxt routes have no trailing slash while static files are
 Use `drop-trailing-slash`. If a page builds slugs itself, drop empty
 segments.
 
-`public/_headers` is copied into `dist` — use it for cache headers on
+`public/_headers` is copied into `dist`. Use it for cache headers on
 `/_nuxt`. Put `.cloudflare` and `.wrangler` in `.gitignore`.
 
 ## Workers Builds
@@ -128,33 +128,33 @@ Console settings (GitHub connection, no API token in the repo):
 Preview URLs: branch alias
 `<branch-slug>-<worker>.sayhola.workers.dev` (stable per PR, later builds
 update the same one), plus `<hash>-<worker>.sayhola.workers.dev` per
-commit. Cloudflare's PR comment says "No Preview URL" when you use `cf` —
-only `wrangler preview` fills that in. Expected; take the address from the
-alias or the build log. Keep using `cf`; do not switch to wrangler just for
-that comment.
+commit. Cloudflare's PR comment says "No Preview URL" when you use `cf`,
+because only `wrangler preview` fills that in. That is expected. Take the
+address from the alias or the build log. Keep using `cf` rather than
+switching to wrangler just for that comment.
 
 Worker Previews do not inherit production vars, bindings, or secrets. Write
 what a preview needs into Previews Base. For a static site both sides need
 only `NODE_VERSION`.
 
-Do not click Retry after changing console settings — Retry reuses the old
+Do not click Retry after changing console settings. Retry reuses the old
 settings. Push a new commit instead.
 
 `cf workers-builds workers migrate-to-previews` is a one-time,
 irreversible step, and only for a Worker already on Workers Builds with the
-old non-production trigger. New Workers are already preview-native; do not
+old non-production trigger. New Workers are already preview-native, so do not
 run the migration on them.
 
 ## Version pinning
 
-- `cf` is beta; commands and config format still move. Verified version is
-  `1.0.0-beta.12` — pin it, do not track latest.
+- `cf` is beta, and commands and config format still move. Verified version is
+  `1.0.0-beta.12`. Pin it rather than tracking latest.
 - Loading `cloudflare.config.ts` needs Node.js >= 22.18
-  (`module.registerHooks`). The error message can look like a Bun problem;
+  (`module.registerHooks`). The error message can look like a Bun problem,
   check `node -v` first.
 - Once a project declares `cf`, a global `cf` forwards to the project's
   copy.
-- `cf deploy --dry-run` needs no login — use it to confirm assets made it
+- `cf deploy --dry-run` needs no login. Use it to confirm assets made it
   into the bundle. Do not add `--prebuilt`.
 - `cf auth login` opens a browser. For unattended runs use
   `CLOUDFLARE_API_TOKEN` from the environment, never in the repo.
