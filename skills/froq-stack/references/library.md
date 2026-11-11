@@ -46,8 +46,8 @@ repo and keep it. Snapshot outputs that are large or language-specific via
 `pnpm-workspace.yaml` uses named catalogs and one of
 `ignoreWorkspaceRootCheck: true` or `packages: ['.']` so a single-package
 repo still gets catalog resolution. Names as in `overrides.md`
-(`prod` / `dev` / `inlined` / `frontend`), never the default `catalog:`
-that the generator emits.
+(`prod` / `dev`; add `inlined` / `frontend` only when a repo needs that
+split), never the default `catalog:` that the generator emits.
 
 ## CI
 

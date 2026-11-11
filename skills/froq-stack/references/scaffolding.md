@@ -38,7 +38,7 @@ pass `--no-agent`.
 src/index.ts
 tests/index.test.ts
 vite.config.ts       staged / pack / lint / fmt blocks
-pnpm-workspace.yaml  default catalog + vite→vite-plus-core override
+pnpm-workspace.yaml  default catalog (must be re-categorised) + vite override
 tsconfig.json
 .vite-hooks/pre-commit   → vp staged
 package.json
@@ -69,8 +69,9 @@ pnpm-workspace.yaml packages: apps/*, packages/*, tools/*
 ## Deltas to apply after scaffolding
 
 1. **Named catalogs.** The generators emit a default `catalog:` block.
-   froQ uses named catalogs (`prod`, `dev`, `inlined`, `frontend`). See
-   `overrides.md` — this is the biggest divergence.
+   froQ uses named catalogs only (`prod`, `dev`), so every generator entry
+   has to move into a category. See `overrides.md` — this is the biggest
+   divergence.
 2. **Lint composition.** The generators emit `lint: { ... }` in vp's native
    object form. Switch to `oxlint-flat-config/vite-plus` if the repo needs
    composable presets. See `lint-format.md`.

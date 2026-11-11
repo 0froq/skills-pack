@@ -10,18 +10,21 @@ Do not invent `cli`, `testing`, `types`, `agentic` from the starter
 templates, and do not add `inlined`/`frontend` until a repo actually needs
 that split.
 
-The **default** `catalog:` block is used for entries that do not belong to
-`dev` or `prod`:
+**The default `catalog:` block is not used.** Every version lives in a
+named category, so a reader can tell what a dependency is for from the
+catalog name alone. `catalog:` with no name has no category and is banned.
 
-| Repo | default catalog holds |
-| --- | --- |
-| `ui` | `@froq/og-covers-layer` (a `github:` ref) |
-| `lig`, `osdash` | `into-the-void`, `jiti` |
+Current violations, to fix when each repo is next touched:
 
-So the rule is "named catalogs carry normal deps, the default one carries
-shared odd entries", not "never touch the default catalog". One rule
-holds: pin a shared tool once, and do not duplicate the same package in
-both a named catalog and the default one.
+| Repo | default entry | belongs in |
+| --- | --- | --- |
+| `ui` | `@froq/og-covers-layer` | `prod` (runtime layer for the docs site) |
+| `lig`, `osdash` | `into-the-void` | `prod` |
+| `lig`, `osdash` | `jiti` | `dev` |
+
+When fixing one, move the entry into the named catalog and update the
+`catalog:` references in `package.json`. Do not leave the same package in
+both places.
 
 `skilly` and `feeds` have no catalogs at all — fine for a repo with a
 single package and no shared versions.
