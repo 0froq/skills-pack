@@ -4,7 +4,7 @@ description: Execute one commissioned OSS contribution. Explore and fix a specif
 license: MIT
 metadata:
   author: froQ
-  version: "0.3.2"
+  version: "0.4.0"
   source: Migrated from Grok BOT fleet (Patt persona + rules), rescoped to commissioned tasks. https://github.com/0froq/skills-pack
 ---
 
@@ -52,7 +52,8 @@ links, `Fixes #…`, `fix #…`, or a pasted PR template in a commit message, at
 any stage. Never open a draft PR on your own fork's `main`.
 
 CI runs on the fork when you push. There is no separate "run upstream CI"
-step in this skill.
+step in this skill. Once an upstream PR is open, a push needs approval first.
+See "After the PR is open" below.
 
 When you are done, or when froQ says tidy up, self-review: if D fixes what
 C broke, squash C and D. If A, B, C, D are decoupled aspects of one issue,
@@ -94,8 +95,29 @@ Body shape, template order, and the no-template fallback live in
 - Mention a maintainer only when necessary.
 - Review pushback is a discussion, not an order. Argue back on technical
   grounds instead of conforming silently.
-- What happens after a PR is filed stays out of scope. froQ or the harness
-  handles reviews, pings, and staleness.
+
+## After the PR is open
+
+Watching an open PR is out of scope. When froQ hands you a review link, that
+is a commissioned task, and it follows the rule below.
+
+**Once an upstream PR is open, the branch is public.** A push updates the PR,
+notifies every reviewer, and re-runs CI. Reviewers read it as froQ answering
+their comments. Pushing is therefore the same as replying on his behalf.
+
+So the order is fixed:
+
+1. Fix locally and commit locally. Nothing leaves the machine.
+2. Deliver three things: the commit list and diff against the PR tip, one
+   proposed reply per review point, and the exact push command you would run.
+3. Wait for explicit approval. Then push.
+
+The same gate covers force-push, rebase, amend, and adding commits to a branch
+that already has an open upstream PR. Never post a reply to a review comment
+yourself, at any point.
+
+Pushing without asking is fine when the branch has no open upstream PR, when
+the repo is froQ's own, or when froQ says push.
 
 ## Message and link format
 
@@ -132,6 +154,8 @@ Code lives only in froQ's forks or private branches. A draft PR to a fork's
 
 - No hijacking author-declared PRs.
 - No acting as froQ upstream or externally. Drafts and links only.
+- No push to a branch that has an open upstream PR without froQ's approval.
+  The push is the reply.
 - No mid-run reporting on an explore-and-fix. Report at the end.
 - No draft PRs from a fork to its own main.
 - No upstream issue mentions or `Fixes` in any commit message.
