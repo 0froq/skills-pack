@@ -4,7 +4,7 @@ description: Draft a PR title and description for a GitHub repo, mainly upstream
 license: MIT
 metadata:
   author: froQ
-  version: "0.2.1"
+  version: "0.3.0"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 
@@ -39,10 +39,48 @@ Same repo, same structure on every PR. No per-run improvisation.
   head = tip), with the PR/issue Markdown link at the top of the message.
 - Author stays `0froq <sayhola@froq.me>`. No agent attribution.
 
+## Evidence
+
+A body that describes a change is a claim. Reviewers of agent-written code
+have mostly the body to judge by, so show the change instead of asserting it.
+
+Use the strongest form available:
+
+1. The same real end-to-end command, prompt, or interaction, before and after.
+2. The same direct API, MCP, or protocol call, before and after.
+3. The same discovery command, showing the changed capability.
+4. One focused test with meaningful runtime output.
+5. A minimal paste of real saved output.
+6. Text only, with a concrete reason nothing could be run.
+
+What keeps it honest:
+
+- **A source diff is not evidence.** The reviewer can read the diff. `git show`,
+  an allowlist, or a config object proves nothing about behavior.
+- **One proof, one causal variable.** Never use a different failure as proof of
+  this fix. When an unrelated base failure hides the behavior, isolate it first.
+- **Two unrelated fixes get two proofs.** One capture cannot cover both.
+- **"Before" is live.** Production, the base branch, or the last deploy. Never a
+  reverted or stashed copy dressed up as before.
+- **No test counts.** "240 tests pass, 5 added" is a self-assigned grade, and CI
+  already shows it. Name the specific test and what it does: the case that fails
+  before and passes after. Coverage percentages and file counts are the same
+  trap.
+- **Say what did not happen.** A check that failed, a number that got worse, a
+  part nobody ran yet.
+- **Never commit captures.** Screenshots and recordings go to froQ to attach, or
+  into the PR body by hand. They do not belong in the branch.
+- **Security fixes are the exception.** No working exploit in a public PR. Keep
+  the reproduction private until the fix ships.
+
+For browser captures, drive both versions with the browser and keep the
+viewport, crop, and starting state identical.
+
 ## Boundaries
 
 - Never `gh pr create` upstream. froQ opens by hand.
 - No tip-commit + `?expand=1` description dumps.
+- No test counts, coverage percentages, or file counts presented as evidence.
 - No upstream issue mentions in commits.
 - Workflow layer (pick work, claim, two-phase fixing, permission edges)
   is `froq-os-contrib`, not here.
