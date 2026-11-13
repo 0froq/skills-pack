@@ -4,7 +4,7 @@ description: Draft a PR title and description for a GitHub repo, mainly upstream
 license: MIT
 metadata:
   author: froQ
-  version: "0.3.0"
+  version: "0.3.1"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 
@@ -73,8 +73,21 @@ What keeps it honest:
 - **Security fixes are the exception.** No working exploit in a public PR. Keep
   the reproduction private until the fix ships.
 
-For browser captures, drive both versions with the browser and keep the
-viewport, crop, and starting state identical.
+## Browser captures
+
+Which tool depends on the job.
+
+- **Needs froQ's logged-in state** to reach the page at all: `ego-browser`. It
+  reuses his sessions, and nothing else can get in without credentials.
+- **Needs comparable before and after**: a scripted browser (Playwright) run
+  from a temporary directory. Same viewport, same crop, same starting state,
+  twice. That is what makes the pair readable rather than plausible.
+- **The repo already has browser tests**: use those. The project's own harness
+  is the reproducible form.
+
+Never add Playwright or any browser tool to the upstream repo's dependencies
+just to capture evidence. Capture from a temporary directory, or use what the
+repo ships. Either way, look at every capture before using it.
 
 ## Boundaries
 

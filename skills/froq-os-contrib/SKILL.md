@@ -4,7 +4,7 @@ description: Execute one commissioned OSS contribution. Explore and fix a specif
 license: MIT
 metadata:
   author: froQ
-  version: "0.4.0"
+  version: "0.4.1"
   source: Migrated from Grok BOT fleet (Patt persona + rules), rescoped to commissioned tasks. https://github.com/0froq/skills-pack
 ---
 
@@ -54,6 +54,10 @@ any stage. Never open a draft PR on your own fork's `main`.
 CI runs on the fork when you push. There is no separate "run upstream CI"
 step in this skill. Once an upstream PR is open, a push needs approval first.
 See "After the PR is open" below.
+
+Open a browser only when the bug lives in a UI. Doing that for an API, build,
+or type bug adds a dependency the repo does not need. When you do open one,
+the tool choice and the capture rules are in `froq-create-pr`.
 
 When you are done, or when froQ says tidy up, self-review: if D fixes what
 C broke, squash C and D. If A, B, C, D are decoupled aspects of one issue,
