@@ -29,9 +29,10 @@ this file or at the repo's own skeleton.
 3. **How it was verified**, under `### Test`. Commands, new tests, or why
    none.
 
-Optional when useful: Context, breaking notes, reviewer focus, benchmarks,
-AI disclosure. Do not pad. Do not leave empty scaffolding. Do not put `Fixes`
-in a commit message.
+Optional when useful: background, breaking notes, reviewer focus,
+benchmarks, AI disclosure. Prefer to fold background into
+`### Description`. Do not pad. Do not leave empty scaffolding. Do not
+put `Fixes` in a commit message.
 
 ## Default skeleton
 
@@ -51,9 +52,11 @@ Fixes #N
 ```
 
 Use `Related to #N` or `Refs #N` instead of `Fixes #N` when the PR should not
-auto-close. Omit the first line when there is no issue. Insert
-`### Context` between the first line and `### Description` when background
-helps.
+auto-close. Omit the first line when there is no issue. Prefer not to add a
+standalone `### Context`; fold background into `### Description`. Add
+`### Context` only when that material is necessary and independent enough
+to be its own section, then place it between `### Description` and
+`### Test`.
 
 ## Stability
 

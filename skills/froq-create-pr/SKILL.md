@@ -24,7 +24,10 @@ hand. The agent produces the draft and links, never `gh pr create`.
 3. **Fallback skeleton.** When neither exists, use
    [references/fallback-skeleton.md](references/fallback-skeleton.md):
    first line `Fixes #N` / `Related to #N` (no Linked heading) →
-   `### Description` → `### Test`, optional `### Context` between.
+   `### Description` → `### Test`. Prefer not to add a standalone
+   `### Context`; fold background into Description. Add `### Context`
+   only when that material is necessary and independent enough to be
+   its own section, then place it between Description and Test.
 
 Same repo, same structure on every PR. No per-run improvisation.
 
