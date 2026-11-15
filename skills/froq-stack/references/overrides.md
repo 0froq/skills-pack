@@ -45,7 +45,7 @@ Two shapes in use:
   `.vite-hooks/pre-commit` → `vp staged` with
   `staged: { '*': 'vp check --fix' }` in `vite.config.ts`.
 
-Pick one per repo and keep it. Do not run the full `ci` gate on every
+Pick one per repo and keep it. Do not run the full `check` gate on every
 commit, and do not use `nano-staged`.
 
 ## Packages that ship source

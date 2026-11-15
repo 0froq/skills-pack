@@ -19,7 +19,7 @@ packages:
 ## Scripts Convention
 
 Have scripts in each package, and use `-r` (recursive) flag at root.
-Have a `ci` script at root that runs all checks.
+Have a `check` script at root that runs all checks.
 
 ```json
 // root package.json

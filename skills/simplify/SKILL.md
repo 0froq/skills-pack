@@ -30,7 +30,8 @@ not touch.
 3. **Ablate.** Try remove, inline, or merge. Decide by the table in the next
    section.
 4. **Apply in batches.** After each batch run the repo's `check` script
-   (`froq-stack` defines it as lint + format + typecheck + tests). Revert
+   (`froq-stack` defines it as lint + format + typecheck, plus any extra
+   checks that repo already wires into `check`). Revert
    what breaks. That piece is now proven needed.
 5. **Report.** One table of what was cut or kept and why, plus
    `git diff --stat` before and after. No commit unless asked.

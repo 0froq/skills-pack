@@ -88,22 +88,19 @@ nlx fast-npm-meta version vite nuxt vue     # multiple at once
 
 ### Knip
 
-Use [Knip](https://knip.dev) to catch unused files, exports, and
-dependencies. Linters see one file at a time, Knip sees the graph:
+Do not add [Knip](https://knip.dev) unless the repo already uses it or
+froQ explicitly asks. "Not mentioned" means do not add it. When a repo
+already has Knip, keep it in `check`. Fix reports by deleting. Use
+`ignoreDependencies` only for tools invoked outside package.json scripts.
 
-```json
-// knip.json
-{ "$schema": "https://unpkg.com/knip@6/schema.json", "project": ["src/**/*.ts"] }
-```
+### The `check` gate
 
-Fix reports by deleting. Use `ignoreDependencies` only for tools invoked
-outside package.json scripts.
-
-### The `ci` gate
-
-Every repo exposes one `ci` script that runs all checks in a single
-command (lint + format check + typecheck + knip + tests). Run it before
-committing. Do not commit on a failing `ci`. Fix the cause, not the rule.
+Every repo exposes one `check` script as the aggregate gate: lint +
+format check + typecheck, plus any extra checks the repo already
+includes. Do not add Knip or tests to `check` unless that repo already
+runs them there, or froQ asks. A separate `test` script stays
+separate. Run `check` before committing. Do not commit on a failing
+`check`. Fix the cause, not the rule.
 
 ### Git hooks
 
@@ -142,7 +139,7 @@ Never the default catalog. Names adjust per project.
 - No auto-import reliance in business code (see Explicitness)
 - No path aliases
 - No `any` unless justified in a comment
-- No committing with a failing `ci`
+- No committing with a failing `check`
 
 ## Hand-offs
 

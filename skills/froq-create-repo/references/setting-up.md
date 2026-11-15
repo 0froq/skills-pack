@@ -89,7 +89,7 @@ Standard scripts for oQ-style projects:
     "lint:fix": "vp lint --fix",
     "fmt": "vp fmt",
     "fmt:check": "vp fmt --check",
-    "ci": "vp run lint && vp run fmt:check && vp run typecheck && vp run test --run",
+    "check": "vp run lint && vp run fmt:check && vp run typecheck",
     "postinstall": "nuxt prepare",
     "prepare": "npx simple-git-hooks"
   }
