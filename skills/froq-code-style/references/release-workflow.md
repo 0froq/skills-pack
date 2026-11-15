@@ -86,7 +86,8 @@ changelogithub parses conventional commits. Follow this format:
 | `refactor` | Code refactoring | 🏗 Refactoring |
 | `perf` | Performance improvements | ⚡ Performance |
 | `test` | Adding/updating tests | 🧪 Tests |
-| `chore` | Build/process changes | 🛠 Chore |
+
+Do not use `chore`. It is easy to overuse as a catch-all.
 
 ### Examples
 
@@ -147,7 +148,6 @@ Generated changelog includes:
 - 🧪 Tests
 - ⚡ Performance
 - 🎨 Styles
-- 🛠 Chore
 
 ## Custom Configuration
 
