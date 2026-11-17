@@ -4,7 +4,7 @@ description: Draft a title and body for a new GitHub issue, mainly upstream. Cov
 license: MIT
 metadata:
   author: froQ
-  version: "0.2.1"
+  version: "0.2.2"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 
@@ -14,9 +14,19 @@ Draft new issues. froQ submits by hand. The agent produces the draft only.
 
 ## Structure order
 
-1. **Upstream template first.** Check `.github/ISSUE_TEMPLATE/`. If a
-   template exists, fill its fields exactly. Pick the type (bug or feature)
-   the template offers.
+1. **Find the template.** GitHub resolves it in two layers.
+   - In the repo: `.github/ISSUE_TEMPLATE/`. That is the only valid location
+     for issue templates, not the root and not `docs/`.
+   - If the repo has none: the owner's `.github` repository, meaning
+     `<org>/.github` for an org-owned repo or `<user>/.github` for a
+     user-owned one.
+
+   Issue templates are all or nothing. The moment a repo ships any template
+   in its own `.github/ISSUE_TEMPLATE/`, GitHub ignores the shared defaults
+   completely, so read the repo ones first and stop there.
+
+   If a template exists, fill its fields exactly. Pick the type (bug or
+   feature) the template offers.
 2. **No template.** Minimal structure:
    - Bug: `## Summary` (one-line symptom) → `## Reproduction` (minimal,
      runnable) → `## Expected` / `## Actual` → `## Environment`

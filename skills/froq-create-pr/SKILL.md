@@ -4,7 +4,7 @@ description: Draft a PR title and description for a GitHub repo, mainly upstream
 license: MIT
 metadata:
   author: froQ
-  version: "0.3.1"
+  version: "0.3.2"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 
@@ -15,11 +15,18 @@ hand. The agent produces the draft and links, never `gh pr create`.
 
 ## Structure order
 
-1. **Upstream template first.** Check `.github/PULL_REQUEST_TEMPLATE*.md`
-   and the org `.github` repo. If a template exists, fill its fields in
-   order. Add or remove no headings.
+1. **Find the template.** Two layers, same order inside each.
+   - In the repo: `.github/`, then the repo root, then `docs/`. Valid names
+     are `PULL_REQUEST_TEMPLATE.md` and a `PULL_REQUEST_TEMPLATE/`
+     directory.
+   - If the repo has none: the owner's `.github` repository, meaning
+     `<org>/.github` for an org-owned repo or `<user>/.github` for a
+     user-owned one, with the same `.github` then root then `docs` order.
+
+   A repo-level template wins over the shared one. If a template exists,
+   fill its fields in order. Add or remove no headings.
 2. **Repo-level skeleton.** If the contribution repo keeps its own fixed
-   skeleton (registered in `froq-os-contrib`'s contribution log), it
+   skeleton, for example in a `contributing` doc or the task brief, it
    overrides the default.
 3. **Fallback skeleton.** When neither exists, use
    [references/fallback-skeleton.md](references/fallback-skeleton.md):
