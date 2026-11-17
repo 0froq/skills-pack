@@ -37,6 +37,7 @@ pnpx skills add 0froq/skills-pack --skill=froq-stack
 | [external-copy-polish](skills/external-copy-polish) | 对外文案去 AI 味：标点、口吻、checklist |
 | [simplify](skills/simplify) | 把当前 diff 消融到最小正确版本 |
 | [froq-review](skills/froq-review) | 审别人的 PR：意图 / 规范两轴，证据先行 |
+| [froq-explain](skills/froq-explain) | 向 froQ 解释：行为优先，深度跟问题走 |
 
 ## 加一份
 
@@ -66,6 +67,7 @@ skill 之间平行原子化，靠引导指向串起来：
 froq-create-repo  ──→ froq-stack / froq-web-app / froq-code-style
 froq-os-contrib   ──→ froq-create-pr / froq-create-issue
 froq-review       ──→ simplify（自己的 diff）/ froq-os-contrib（贡献流程）
+froq-explain      ──→ external-copy-polish（对外文案）/ froq-create-pr（正文）
 froq-os-contrib, froq-create-pr, froq-create-issue, froq-mailman
                   ──→ external-copy-polish（对外草稿润色）
 froq-stack        ──→ froq-code-style / froq-web-app
