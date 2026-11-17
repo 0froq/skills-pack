@@ -1,89 +1,125 @@
 ---
 name: froq-explain
-description: "解释任何东西给 froQ 听：issue、PR、bug、报错、实现、设计取舍。按行为变化组织，深度跟着问题走，不用小标题脚手架。froQ 说「解释一下」「这是怎么回事」「为什么会有这个现象」「怎么修的」时使用。"
+description: "Explain anything to froQ: an issue, a PR, a bug, an error, an implementation, a design trade-off. Behaviour first, depth follows the question, no labelled scaffolding. Use when froQ asks what something means, why a symptom exists, or how something was fixed."
 license: MIT
 metadata:
   author: froQ
-  version: "0.1.0"
+  version: "0.1.1"
   source: Hand-written from froQ's reading preferences, fitted on voidzero-dev/void#862 and #864. https://github.com/0froq/skills-pack
 ---
 
 # froq-explain
 
-怎么把一件事讲给 froQ 听。管叙述方式和深度，不管写给别人看的文案（`external-copy-polish`），也不管 PR / issue 正文（`froq-create-pr` / `froq-create-issue`）。
+How to make something land for froQ. Governs the shape and depth of an
+explanation, not outward copy (`external-copy-polish`) and not PR or issue
+bodies (`froq-create-pr` / `froq-create-issue`).
 
-## 单位是行为，不是代码位置
+Output language follows froQ's. He writes Chinese, so the explanation is
+Chinese with technical terms left in English.
 
-按「什么行为、在什么情况下、变成了什么」组织，不按文件、函数、调用链组织。读者是这个工具的使用者，不是这段代码的维护者。
+## The unit is behaviour, not code position
 
-文件、函数名、API 名只在被问到「改哪」时出现。默认不出现。
+Organise around what behaviour, under what condition, became what. Not around
+files, functions, or a call chain. The reader is a user of the tool, not a
+maintainer of that code.
 
-## 深度三档，跟着问题走
+File names, function names, and API names appear only when the question is
+"where do I change it". Default to none.
 
-| 问的是 | 讲到哪 |
+## Three depths, chosen by the question
+
+| The question | Where to land |
 | --- | --- |
-| 为什么会有这个现象，这个 issue 怎么回事 | 行为层。只说判断依据或行为变了，不点 API 名 |
-| 怎么修掉的 | 行为 + 机制名。点出真正做判断的那个东西 |
-| 我来改，改哪 | 落到文件与函数，指出哪一行被什么取代 |
+| Why does this symptom exist? What happened in this issue? | Behaviour only. Name what the decision was based on, not the API |
+| How was it fixed? | Behaviour plus the mechanism name |
+| Where do I change it? | File and function, naming the line that was replaced |
 
-同一件事，三档依次是：
+The same fact at all three depths:
 
-1. 判断依据从「SQL 文本长什么样」换成「数据库说这条语句会不会返回行」。
-2. 判断依据从匹配文本开头，换成 better-sqlite3 的 `statement.reader`。
-3. `db.ts` 的 `runExecute()` 里，`/^SELECT/` 那个分支被 `prepareSingleStatement()` 取代。
+1. The decision moved from "what does the SQL text look like" to "does the
+   database say this statement returns rows".
+2. The decision moved from matching the text prefix to better-sqlite3's
+   `statement.reader`.
+3. In `runExecute()` in `db.ts`, the `/^SELECT/` branch is replaced by
+   `prepareSingleStatement()`.
 
-## 两种讲法，并列
+## Two forms, used in parallel
 
-**行为叙述。** 现在是什么行为，这个行为为什么不对劲，中间哪一步决定了它，改成什么，现在又变成什么。用句子推进，不出现「之前」「之后」「为什么不合理」这类小标题或加粗标签。
+**Behaviour narrative.** What the behaviour is now, why it is wrong, which step
+in the middle decided it, what it became, what the behaviour is now. Carried by
+sentences. No headings or bold labels reading "before", "after", "why this is
+wrong".
 
-**回归叙述。** 某个行为本来就带缺陷：怎么发生，代价是什么，改了哪处，缺陷消失。不是「描述测试」，是说清一个已有的错误和它的了结。
+**Regression narrative.** A behaviour that already shipped broken: how it
+happened, what it cost, what changed, and the defect is gone. This is not
+"describing the tests". It describes an existing error and its resolution.
 
-有回归时两种都给。行为叙述讲现在为什么对，回归叙述讲过去错在哪，缺一半读者就要自己补。
+When there is a regression, give both. The behaviour narrative says why the
+current shape is right. The regression narrative says what used to be wrong.
+With only one, the reader has to reconstruct the other.
 
-## 「为什么不对劲」的三种依据
+## Why something is wrong: three grounds
 
-按具体情况挑，可以叠加，不需要每次凑齐：
+Pick what the case actually is. They stack, and no template needs all three.
 
-- **用户预期**：这个命令、这个功能存在的目的就是 X，做不到就是坏。
-- **一致性**：同一个工具或同一套 API 在别的路径上是 Y，这里不是，用户没法判断哪边可信。
-- **内部矛盾**：报告的和发生的不一致。报成功却没做，报失败却改了数据。
+- **User expectation.** The command or feature exists to do X. It does not, so
+  it is broken.
+- **Consistency.** The same tool or API behaves one way on another path and
+  differently here, so the user cannot tell which side to trust.
+- **Internal contradiction.** What is reported and what happened disagree. It
+  reports success and did nothing, or reports failure and changed data.
 
-依据来自具体问题，不是模板。选错了会把真实理由换成一句正确但空的话。
+The ground comes from the problem. Picking the wrong one replaces the real
+reason with a sentence that is true and empty.
 
-## 这几种讲法对 froQ 无效
+## Forms that do not work for froQ
 
-实测过，不要用：
+Measured. Do not use them.
 
-- **一句话版**：为了简单而简单，细节全丢，读者还得回来问。
-- **调用链导览**：从入口函数一路走下来。只在读者熟悉这个代码库时有用，通常不熟。
-- **类比**：生活化类比承载不了机制，还会引入本来不存在的错误理解。
-- **代码优先**：先贴 diff 再解释，等于要求读者先看懂代码，因果反了。
-- **维护者视角**：只讲「以后改这里要注意什么」。回答了没人问的问题。
+- **One-liner.** Simplifying for its own sake. The detail is gone and the
+  reader has to come back and ask.
+- **Call-chain tour.** Walking from the entry point downward. Useful only to
+  someone who already knows that codebase, and usually they do not.
+- **Analogy.** A life-sized analogy cannot carry a mechanism, and it imports
+  wrong understanding that was never there.
+- **Code first.** Pasting the diff before explaining means the reader must
+  understand the code first. The causality is backwards.
+- **Maintainer view.** Only saying what future editors should watch out for.
+  Answers a question nobody asked.
 
-## 术语
+## Terms
 
-技术名词保留英文原样。非通用术语第一次出现时就地用几个字说明，同一个词只说明一次。不为了通俗把 `RangeError` 说成「某种错误」，那会让读者下次对不上号。
+Keep technical terms in English as written. Gloss a non-obvious one in a few
+words the first time it appears, once. Do not smooth `RangeError` into "some
+kind of error", because the reader then cannot match it to the code.
 
-## 版本对比时要贴真实输出
+## When comparing versions, paste real output
 
-讲行为变化时，前后两段输出从真实运行里取，不重打、不整理。只差一行的那份输出比一段描述有用得多。
+For a behaviour change, take both sides from a real run. Do not retype and do
+not tidy. Two outputs differing by one line carry more than a paragraph about
+them.
 
-## 验收
+## How you know it worked
 
-读完的人应该能自己复述两件事：什么行为变成了什么，原来那个为什么不对。
+The reader can restate two things unaided: what behaviour became what, and why
+the previous one was wrong.
 
-做不到就是没讲清，不是读者的问题。
+If they cannot, the explanation failed. That is not the reader's problem.
 
 ## Boundaries
 
-- 不负责对外文案、PR 正文、issue 正文、评审意见，各有自己的 skill。
-- 不编造行为。没跑过的不能说成跑过，没验证的不能说成验证过。
-- 不用固定的段落标题组织解释本身。标题可以有，但不要把「之前」「之后」「原因」写成模板填空。
-- 不为完整而罗列。没帮上结论的细节不写。
+- Not outward copy, PR bodies, issue bodies, or review comments. Each has its
+  own skill.
+- Never invent behaviour. Something not run is not "ran". Something not
+  verified is not "verified".
+- No fixed scaffolding in the explanation itself. Headings are allowed, but
+  "before", "after", and "reason" are not fill-in slots.
+- No listing for completeness. Detail that does not serve the conclusion stays
+  out.
 
 ## Hand-offs
 
-- 写给别人看的文案：`external-copy-polish`
-- PR / issue 正文：`froq-create-pr` / `froq-create-issue`
-- 评审别人的代码：`froq-review`
-- 设计取舍收敛：`whittle`
+- Copy written for other people: `external-copy-polish`
+- PR and issue bodies: `froq-create-pr` / `froq-create-issue`
+- Reviewing someone else's code: `froq-review`
+- Settling a design trade-off: `whittle`
