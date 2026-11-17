@@ -36,8 +36,7 @@ pnpx skills add 0froq/skills-pack --skill=froq-stack
 | [whittle](skills/whittle) | 把开放设计问题收敛为 DAG 并清零 |
 | [external-copy-polish](skills/external-copy-polish) | 对外文案去 AI 味：标点、口吻、checklist |
 | [simplify](skills/simplify) | 把当前 diff 消融到最小正确版本 |
-
-预留：`froq-review`（code review 规范，待写）。
+| [froq-review](skills/froq-review) | 审别人的 PR：意图 / 规范两轴，证据先行 |
 
 ## 加一份
 
@@ -66,6 +65,7 @@ skill 之间平行原子化，靠引导指向串起来：
 ```text
 froq-create-repo  ──→ froq-stack / froq-web-app / froq-code-style
 froq-os-contrib   ──→ froq-create-pr / froq-create-issue
+froq-review       ──→ simplify（自己的 diff）/ froq-os-contrib（贡献流程）
 froq-os-contrib, froq-create-pr, froq-create-issue, froq-mailman
                   ──→ external-copy-polish（对外草稿润色）
 froq-stack        ──→ froq-code-style / froq-web-app
