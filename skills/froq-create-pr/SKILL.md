@@ -90,30 +90,54 @@ does not read as unfinished work.
 **Boundaries and risks.** Add for accept when there are real failure modes, a
 migration, or an external effect. One line per row, not an essay.
 
-## Optional block: the claim
+## Claim block
 
-At the very top of the body, above `Fixes #N`, in a blockquote. Added only when
-froQ asks for it.
+The block sits at the very top of the body, above `Fixes #N`, in a blockquote.
 
-Three sentences. The middle one is not optional, because a claim about agent
-work without it reads as unreviewed output. The last one covers the writing
-itself, so the reviewer knows the prose and the evidence came from the same
-place.
+Two independent statements, because the code and the writing are separate work.
+Each is its own decision.
+
+**Description.** On by default. This skill exists to draft the description, so
+the sentence is true whenever it is used.
 
 ```text
-> Most of this implementation was written by an agent. froQ has reviewed the code. This description was drafted by an agent from the diff and the commands it ran.
+> This description was drafted by an agent from the diff.
+```
+
+When the body carries command output or measurements, name the source as well:
+
+```text
+> This description was drafted by an agent from the diff and the commands it ran.
+```
+
+**Implementation.** Off by default. Added only when froQ says so. The review
+sentence is mandatory, because a claim about agent code without it reads as
+unreviewed output.
+
+```text
+> Most of this implementation was written by an agent. froQ has reviewed the code.
 ```
 
 Add the decisions clause only when it is true. If the agent picked the
 architecture, do not claim the decisions were human. Ask when unsure.
 
 ```text
-> Most of this implementation was written by an agent. froQ has reviewed the code, and the decisions in it are his. This description was drafted by an agent from the diff and the commands it ran.
+> Most of this implementation was written by an agent. froQ has reviewed the code, and the decisions in it are his.
 ```
 
 ```text
-> Most of this implementation was written by an agent. froQ has reviewed the code. The approach was proposed by the agent and approved by froQ. This description was drafted by an agent from the diff and the commands it ran.
+> Most of this implementation was written by an agent. froQ has reviewed the code. The approach was proposed by the agent and approved by froQ.
 ```
+
+When both apply, one block, implementation first:
+
+```text
+> Most of this implementation was written by an agent. froQ has reviewed the code. This description was drafted by an agent from the diff and the commands it ran.
+```
+
+Only two combinations reach this skill: human implementation with an agent
+description, and agent implementation with an agent description. A description
+froQ wrote himself means the skill was not used, and neither sentence applies.
 
 ## Evidence
 
@@ -190,7 +214,8 @@ just to capture evidence. Either way, look at every capture before using it.
   reassurance and hard to keep honest, and it can steer a reviewer away from the
   weakest part. Risk and decision points go in the sections above, in the place
   they belong.
-- No attribution and no review-status line unless froQ asks for the claim.
+- No attribution beyond the claim block. The description sentence is on by
+  default; the implementation sentence is not.
 - Workflow layer (pick work, claim, two-phase fixing, permission edges) is
   `froq-os-contrib`, not here.
 
