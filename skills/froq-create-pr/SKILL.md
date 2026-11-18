@@ -110,6 +110,17 @@ When the body carries command output or measurements, name the source as well:
 > This description was drafted by an agent from the diff and the commands it ran.
 ```
 
+If froQ edits the draft before sending it, say so instead of leaving the line
+wrong:
+
+```text
+> This description was drafted by an agent from the diff. froQ has modified it.
+```
+
+If the edits are substantial enough that the agent's text is only a starting
+point, drop the line. Saying an agent drafted text froQ rewrote is not honesty,
+it is noise.
+
 **Implementation.** Off by default. Added only when froQ says so. The review
 sentence is mandatory, because a claim about agent code without it reads as
 unreviewed output.
@@ -215,7 +226,7 @@ just to capture evidence. Either way, look at every capture before using it.
   weakest part. Risk and decision points go in the sections above, in the place
   they belong.
 - No attribution beyond the claim block. The description sentence is on by
-  default; the implementation sentence is not.
+  default. The implementation sentence is not.
 - Workflow layer (pick work, claim, two-phase fixing, permission edges) is
   `froq-os-contrib`, not here.
 

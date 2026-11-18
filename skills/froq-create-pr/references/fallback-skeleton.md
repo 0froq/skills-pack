@@ -93,7 +93,7 @@ only the floor.
 
 ## Stability
 
-Same repo, same structure on every PR. Our analysis sections keep their order;
-the template's own sections always come last. In a repo that machine-checks the
+Same repo, same structure on every PR. Our analysis sections keep their order.
+The template's own sections always come last. In a repo that machine-checks the
 template, the template's order wins there instead. Only the body text under each
 heading changes with the work.
