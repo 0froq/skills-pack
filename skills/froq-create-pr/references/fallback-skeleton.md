@@ -8,9 +8,11 @@
    - If the repo has none: the owner's `.github` repository, meaning
      `<org>/.github` for an org-owned repo or `<user>/.github` for a user-owned
      one, with the same `.github` then root then `docs` order.
-2. If a template exists, follow its fields and order strictly. Do not use the
-   skeleton below.
-3. If none exists, use the skeleton below every time for that repo. Do not
+2. If a template exists, its required headings are kept verbatim and filled
+   honestly. They go last. The analysis sections below lead.
+3. If a template machine-checks order, or the CONTRIBUTING states one, follow
+   the template's order for that repo and stay consistent there.
+4. If none exists, use the skeleton below every time for that repo. Do not
    invent a new structure per PR.
 
 ## Repo-level overrides
@@ -22,6 +24,15 @@ may differ in wording.
 
 Never invent a one-off structure inside a task prompt. Point the agent at this
 file or at the repo's own skeleton.
+
+## Order inside the body
+
+1. The summary section, named as the template names it when it has a name for
+   it (`Description`, `Summary`, `What changed`).
+2. The analysis sections that apply: `### Options`, `### Evidence`, a
+   `Not in this PR` line, risks.
+3. The template's own requirements, verbatim: checklists, type-of-change boxes,
+   screenshot slots.
 
 ## Required content
 
@@ -82,5 +93,7 @@ only the floor.
 
 ## Stability
 
-Same repo, same content types and heading names on every PR. Only the body text
-under each heading changes with the work.
+Same repo, same structure on every PR. Our analysis sections keep their order;
+the template's own sections always come last. In a repo that machine-checks the
+template, the template's order wins there instead. Only the body text under each
+heading changes with the work.

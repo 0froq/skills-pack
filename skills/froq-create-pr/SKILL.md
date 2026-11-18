@@ -13,7 +13,7 @@ metadata:
 Draft PR titles and descriptions. froQ opens the PR from the web UI by hand.
 The agent produces the draft and links, never `gh pr create`.
 
-## Structure order
+## Order: our shape first, template slots last
 
 1. **Find the template.** Two layers, same order inside each.
    - In the repo: `.github/`, then the repo root, then `docs/`. Valid names
@@ -22,15 +22,31 @@ The agent produces the draft and links, never `gh pr create`.
      `<org>/.github` for an org-owned repo or `<user>/.github` for a
      user-owned one, with the same `.github` then root then `docs` order.
 
-   A repo-level template wins over the shared one. If a template exists, fill
-   its fields in order. Add or remove no headings.
-2. **Repo-level skeleton.** If the contribution repo keeps its own fixed
-   skeleton, for example in a `contributing` doc or the task brief, it
-   overrides the default.
-3. **Fallback skeleton.** When neither exists, use
-   [references/fallback-skeleton.md](references/fallback-skeleton.md): first
-   line `Fixes #N` / `Related to #N` (no Linked heading) → `### Description`
-   → `### Test`.
+   A repo-level template wins over the shared one. A repo-level skeleton in a
+   `contributing` doc or the task brief also counts.
+2. **Lead with our shape.** The first section carries the summary content. When
+   the template has an equivalent heading (`Description`, `Summary`, `What
+   changed`), use its name for that section.
+3. **Analysis sections next.** `Options` for a proposal, `Evidence`, `Not in
+   this PR`, risks. These are ours. A template with no slot for them does not
+   remove them.
+4. **Template-only requirements last.** Checklists, type-of-change boxes,
+   screenshot slots. Keep their heading names verbatim, fill them honestly,
+   place them after our sections.
+
+**Presence matters, order does not.** GitHub does not enforce template order,
+and a bot can only check whether a heading or a `Fixes #N` line exists. Every
+heading the template requires is present, named as the template names it, in
+our order rather than its own.
+
+One exception. When a repo demonstrably machine-checks the template, or its
+CONTRIBUTING states a required order, fall back to the template's own order for
+that repo and keep it consistent there.
+
+When no template and no repo skeleton exist, use
+[references/fallback-skeleton.md](references/fallback-skeleton.md): first line
+`Fixes #N` / `Related to #N` (no Linked heading) → `### Description` →
+`### Test`.
 
 Same repo, same structure on every PR. No per-run improvisation.
 
@@ -58,7 +74,9 @@ this approach. One paragraph for a small change, two for a larger one. This is
 the only section every PR needs.
 
 **Evidence.** Required for verify, optional otherwise. The ladder and the
-honesty rules are below.
+honesty rules are below. Name it whatever the template names it (`Test`,
+`Testing`, `Verification`), and `### Evidence` when the template has no slot.
+One heading, never two.
 
 **Options.** Required for discuss. A table of what was considered, the cost of
 each, and which one this PR takes. Include the option of doing nothing. The
@@ -171,6 +189,8 @@ just to capture evidence. Either way, look at every capture before using it.
 - Never `gh pr create` upstream. froQ opens by hand.
 - Never open a PR whose diff froQ has not read. Say so in the conversation
   instead of shipping an unread diff.
+- Never delete a heading the template requires, and never check a box that was
+  not verified.
 - No tip-commit + `?expand=1` description dumps.
 - No test counts, coverage percentages, or file counts presented as evidence.
 - No upstream issue mentions in commits.
