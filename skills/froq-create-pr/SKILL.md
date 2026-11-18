@@ -1,58 +1,114 @@
 ---
 name: froq-create-pr
-description: Draft a PR title and description for a GitHub repo, mainly upstream OSS contributions. Covers the template lookup order, the fallback skeleton, Fixes rules, and the draft-only boundary. Use when froQ is about to open a PR, asks for a PR description, or wants a compare link. Contribution workflow context lives in froq-os-contrib.
+description: Draft a PR title and description for a GitHub repo, mainly upstream OSS contributions. Covers the template lookup order, what the body must carry by change type, evidence, and the draft-only boundary. Use when froQ is about to open a PR, asks for a PR description, or wants a compare link.
 license: MIT
 metadata:
   author: froQ
-  version: "0.3.2"
+  version: "0.4.0"
   source: Hand-written. https://github.com/0froq/skills-pack
 ---
 
 # froq-create-pr
 
-Draft PR titles and descriptions. froQ opens the PR from the web UI by
-hand. The agent produces the draft and links, never `gh pr create`.
+Draft PR titles and descriptions. froQ opens the PR from the web UI by hand.
+The agent produces the draft and links, never `gh pr create`.
 
 ## Structure order
 
 1. **Find the template.** Two layers, same order inside each.
    - In the repo: `.github/`, then the repo root, then `docs/`. Valid names
-     are `PULL_REQUEST_TEMPLATE.md` and a `PULL_REQUEST_TEMPLATE/`
-     directory.
+     are `PULL_REQUEST_TEMPLATE.md` and a `PULL_REQUEST_TEMPLATE/` directory.
    - If the repo has none: the owner's `.github` repository, meaning
      `<org>/.github` for an org-owned repo or `<user>/.github` for a
      user-owned one, with the same `.github` then root then `docs` order.
 
-   A repo-level template wins over the shared one. If a template exists,
-   fill its fields in order. Add or remove no headings.
+   A repo-level template wins over the shared one. If a template exists, fill
+   its fields in order. Add or remove no headings.
 2. **Repo-level skeleton.** If the contribution repo keeps its own fixed
    skeleton, for example in a `contributing` doc or the task brief, it
    overrides the default.
 3. **Fallback skeleton.** When neither exists, use
-   [references/fallback-skeleton.md](references/fallback-skeleton.md):
-   first line `Fixes #N` / `Related to #N` (no Linked heading) →
-   `### Description` → `### Test`. Prefer not to add a standalone
-   `### Context`; fold background into Description. Add `### Context`
-   only when that material is necessary and independent enough to be
-   its own section, then place it between Description and Test.
+   [references/fallback-skeleton.md](references/fallback-skeleton.md): first
+   line `Fixes #N` / `Related to #N` (no Linked heading) → `### Description`
+   → `### Test`.
 
 Same repo, same structure on every PR. No per-run improvisation.
 
-## Body rules
+## What the reviewer has to decide
 
-- `Fixes #N` / `Closes #N` goes **only in the PR body**, short `#N` form.
-  Never a full issue URL, never in a commit message.
-- English, concise: what/why first, how-tested after. Do not restate
-  symptoms the issue already covers.
-- Polish through `external-copy-polish` before handoff.
-- Deliver as a fenced code block plus a compare link (base = merge-base,
-  head = tip), with the PR/issue Markdown link at the top of the message.
-- Author stays `0froq <sayhola@froq.me>`. No agent attribution.
+The body is sized by the decision, not by the diff. A 400-line rename needs
+five lines. A ten-line proposal may need a page.
+
+| The reviewer must | Type | Body carries |
+| --- | --- | --- |
+| confirm it works and is safe | verify | Summary, Evidence |
+| agree the design and scope are right | accept | Summary, plus risks and migration notes when they exist |
+| weigh options | discuss | Summary, Options |
+
+A PR can be two of these. A fix whose approach is contested is verify and
+discuss. Present the part that blocks merge first.
+
+Whatever the template calls its sections, the content follows this table. A
+section headed `Test` carries evidence, never counts.
+
+## Sections worth writing
+
+**Summary.** The problem or the capability first, then what changed and why
+this approach. One paragraph for a small change, two for a larger one. This is
+the only section every PR needs.
+
+**Evidence.** Required for verify, optional otherwise. The ladder and the
+honesty rules are below.
+
+**Options.** Required for discuss. A table of what was considered, the cost of
+each, and which one this PR takes. Include the option of doing nothing. The
+table is also the question: the reviewer answers by picking a row. Do not add a
+separate paragraph asking for feedback.
+
+**Not in this PR.** Add when the diff is deliberately partial, which is common
+in a proposal. Name what was left out and why it was left out, so a small diff
+does not read as unfinished work.
+
+**Boundaries and risks.** Add for accept when there are real failure modes, a
+migration, or an external effect. One line per row, not an essay.
+
+## Optional blocks, only when froQ asks
+
+Both live at the top, above everything else. Neither is added by default.
+
+**Claim.** When froQ asks for it, state who did the work. The second sentence
+is not optional, because the first one alone reads as unreviewed output.
+
+```text
+> Most of this implementation was written by an agent. froQ has reviewed the code.
+```
+
+Add the third sentence only when it is true. If the agent picked the
+architecture, do not claim the decisions were human. Ask when unsure.
+
+```text
+> Most of this implementation was written by an agent. froQ has reviewed the code, and the decisions in it are his.
+```
+
+```text
+> Most of this implementation was written by an agent. froQ has reviewed the code. The approach was proposed by the agent and approved by froQ.
+```
+
+**User prompts.** Context for the reviewer about intent. Two kinds of line, and
+the second is the useful one.
+
+```text
+> Asked for: fix #862 so `WITH`, `PRAGMA` and `EXPLAIN` print rows locally.
+> Chose: ask better-sqlite3 for `reader` instead of matching the statement text.
+```
+
+No model name, no harness. `Chose` records decisions froQ made, which the diff
+cannot show.
 
 ## Evidence
 
-A body that describes a change is a claim. Reviewers of agent-written code
-have mostly the body to judge by, so show the change instead of asserting it.
+A body that describes a change is a claim. Reviewers of agent-written code have
+mostly the body to judge by, so show the change instead of asserting it.
 
 Use the strongest form available:
 
@@ -70,8 +126,8 @@ What keeps it honest:
 - **One proof, one causal variable.** Never use a different failure as proof of
   this fix. When an unrelated base failure hides the behavior, isolate it first.
 - **Two unrelated fixes get two proofs.** One capture cannot cover both.
-- **"Before" is live.** Production, the base branch, or the last deploy. Never a
-  reverted or stashed copy dressed up as before.
+- **"Before" is live.** Production, the base branch, or the last deploy. Never
+  a reverted or stashed copy dressed up as before.
 - **No test counts.** "240 tests pass, 5 added" is a self-assigned grade, and CI
   already shows it. Name the specific test and what it does: the case that fails
   before and passes after. Coverage percentages and file counts are the same
@@ -91,29 +147,47 @@ Which tool depends on the job.
   reuses his sessions, and nothing else can get in without credentials.
 - **Needs comparable before and after**: a scripted browser (Playwright) run
   from a temporary directory. Same viewport, same crop, same starting state,
-  twice. That is what makes the pair readable rather than plausible.
-- **The repo already has browser tests**: use those. The project's own harness
-  is the reproducible form.
+  twice.
+- **The repo already has browser tests**: use those.
 
 Never add Playwright or any browser tool to the upstream repo's dependencies
-just to capture evidence. Capture from a temporary directory, or use what the
-repo ships. Either way, look at every capture before using it.
+just to capture evidence. Either way, look at every capture before using it.
+
+## Body rules
+
+- `Fixes #N` / `Closes #N` goes only in the PR body, short `#N` form. One per
+  line for several issues, so GitHub renders each as an issue card. Use
+  `Related to #N` / `Refs #N` for issues the PR should not close.
+- English, concise. Do not restate symptoms the issue already covers.
+- No filler openers such as "This PR aims to". Start with the fact.
+- Polish through `external-copy-polish` before handoff.
+- Deliver as a fenced code block plus a compare link (base = merge-base, head =
+  tip), with the PR or issue Markdown link at the top of the message.
+- Author stays `0froq <sayhola@froq.me>`. No agent attribution beyond the opt-in
+  claim above.
 
 ## Boundaries
 
 - Never `gh pr create` upstream. froQ opens by hand.
+- Never open a PR whose diff froQ has not read. Say so in the conversation
+  instead of shipping an unread diff.
 - No tip-commit + `?expand=1` description dumps.
 - No test counts, coverage percentages, or file counts presented as evidence.
 - No upstream issue mentions in commits.
-- Workflow layer (pick work, claim, two-phase fixing, permission edges)
-  is `froq-os-contrib`, not here.
+- **No reading-guide block.** A "where to look" section is easy to write as
+  reassurance and hard to keep honest, and it can steer a reviewer away from the
+  weakest part. Risk and decision points go in the sections above, in the place
+  they belong.
+- No attribution and no review-status line unless froQ asks for the claim.
+- Workflow layer (pick work, claim, two-phase fixing, permission edges) is
+  `froq-os-contrib`, not here.
 
 ## Hand-offs
 
 - Contribution workflow: `froq-os-contrib`
 - Issue this PR closes: drafted via `froq-create-issue`
+- Explaining the change to froQ first: `froq-explain`
 - External polish: `external-copy-polish`
-- Fallback skeleton: [references/fallback-skeleton.md](references/fallback-skeleton.md)
 
 ## References
 
