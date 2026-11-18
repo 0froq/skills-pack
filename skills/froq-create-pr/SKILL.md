@@ -90,38 +90,30 @@ does not read as unfinished work.
 **Boundaries and risks.** Add for accept when there are real failure modes, a
 migration, or an external effect. One line per row, not an essay.
 
-## Optional blocks, only when froQ asks
+## Optional block: the claim
 
-Both live at the top, above everything else. Neither is added by default.
+At the very top of the body, above `Fixes #N`, in a blockquote. Added only when
+froQ asks for it.
 
-**Claim.** When froQ asks for it, state who did the work. The second sentence
-is not optional, because the first one alone reads as unreviewed output.
+Three sentences. The middle one is not optional, because a claim about agent
+work without it reads as unreviewed output. The last one covers the writing
+itself, so the reviewer knows the prose and the evidence came from the same
+place.
 
 ```text
-> Most of this implementation was written by an agent. froQ has reviewed the code.
+> Most of this implementation was written by an agent. froQ has reviewed the code. This description was drafted by an agent from the diff and the commands it ran.
 ```
 
-Add the third sentence only when it is true. If the agent picked the
+Add the decisions clause only when it is true. If the agent picked the
 architecture, do not claim the decisions were human. Ask when unsure.
 
 ```text
-> Most of this implementation was written by an agent. froQ has reviewed the code, and the decisions in it are his.
+> Most of this implementation was written by an agent. froQ has reviewed the code, and the decisions in it are his. This description was drafted by an agent from the diff and the commands it ran.
 ```
 
 ```text
-> Most of this implementation was written by an agent. froQ has reviewed the code. The approach was proposed by the agent and approved by froQ.
+> Most of this implementation was written by an agent. froQ has reviewed the code. The approach was proposed by the agent and approved by froQ. This description was drafted by an agent from the diff and the commands it ran.
 ```
-
-**User prompts.** Context for the reviewer about intent. Two kinds of line, and
-the second is the useful one.
-
-```text
-> Asked for: fix #862 so `WITH`, `PRAGMA` and `EXPLAIN` print rows locally.
-> Chose: ask better-sqlite3 for `reader` instead of matching the statement text.
-```
-
-No model name, no harness. `Chose` records decisions froQ made, which the diff
-cannot show.
 
 ## Evidence
 
